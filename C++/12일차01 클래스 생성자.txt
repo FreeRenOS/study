@@ -1,0 +1,51 @@
+#include <iostream>
+
+using namespace std;
+
+class Circle
+{
+private:
+	int radius; //멤버 변수
+public:
+	Circle();
+	Circle(int radius);
+	void setRadius(int radius);
+	double getArea(); //멤버 변수
+
+};
+
+Circle::Circle() :Circle(1) {}
+
+
+Circle::Circle(int radius)
+{
+	this->radius = radius;
+}
+
+void Circle::setRadius(int radius)
+{
+
+	this->radius = radius;
+}
+
+
+double Circle::getArea()
+{
+	double area = 3.14 * this->radius * this->radius;
+	return area;
+}
+
+int main()
+{
+
+	Circle donut;
+	donut.setRadius(20);
+	double area = donut.getArea();
+	cout << "피자의 면적은 : " << area << endl;
+
+
+
+
+
+	return 0;
+}

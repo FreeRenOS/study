@@ -1,0 +1,36 @@
+=INT(RAND()*50+50)*IF(INT(RAND()*5)=0,0,1)
+
+
+#include <iostream>
+#include <string>
+#include <fstream>
+
+using namespace std;
+
+int main() {
+
+	//string outs_str;
+	//ofstream out("test.txt");
+	////ofstream out("C:\\Users\\w\\source\\repos\\ch10-04\\ch10-04\\test2.txt");
+	////ofstream out("C:/Users/w/source/repos/ch10-04/ch10-04/test3.txt");//파일에 한글 인코딩 UTP8 인지 확인
+
+	//outs_str = "C++";
+
+	//out << outs_str << endl;
+
+	//out.close();
+
+
+	string in_line;
+
+	ifstream in("test.txt");
+
+	while (getline(in, in_line)) {
+		cout << in_line << endl;
+	}
+
+	in.close();
+
+
+	return 0;
+}

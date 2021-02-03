@@ -1,0 +1,55 @@
+#include <iostream>
+
+using namespace std;
+
+class Rectangle
+{
+private:
+	double width;
+	double height; //멤버 변수
+public:
+	Rectangle();
+	Rectangle(double width, double height);
+	void setRadius(double width, double height);
+	double getArea(); //멤버 변수
+
+};
+
+//Rectangle::Rectangle() : Rectangle(1,1) {} //위임생성자
+
+Rectangle::Rectangle() : width(0),height(0) {}
+
+Rectangle::Rectangle(double width, double height) : width(width), height(height)
+{
+	/*this->width = width;
+	this->height = height;*/
+}
+
+void Rectangle::setRadius(double width, double height)
+{
+
+	this->width = width;
+	this->height = height;
+}
+
+
+double Rectangle::getArea()
+{
+	double area = (this->width) * (this->height);
+	return area;
+}
+
+int main()
+{
+
+	Rectangle rect(5,6);
+	//rect.setRadius(5,6);
+	double area = rect.getArea();
+	cout << "도넛의 면적은 : " << area << endl;
+
+
+
+
+
+	return 0;
+}

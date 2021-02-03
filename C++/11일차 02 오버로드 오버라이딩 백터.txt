@@ -1,0 +1,173 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+
+////오버로드
+//int Plus(int arg1, int arg2)
+//{
+//	return arg1 + arg2;
+//
+//}
+//
+//double Plus(double arg1, double arg2, double arg3)
+//{
+//	return arg1 + arg2 + arg3;
+//}
+//int main() {
+//
+//	int number1 = Plus(2, 4);
+//
+//	double number2 = Plus(1.1, 2.2, 3.3);
+//
+//	cout << "number 1 : " << number1 << endl;
+//	cout << "number 2 : " << number2 << endl;
+//
+//	return 0;
+//}
+
+
+
+////오버라이딩
+//class Base
+//{
+//public:
+//	void Display()
+//	{
+//		cout << "Base : " << endl;
+//	}
+//};
+//class Derived : Base
+//{
+//public:
+//	void Display()
+//	{
+//		cout << "Derived : " << endl;
+//	}
+//};
+//int main() {
+//
+//	Derived child;
+//	child.Display();
+//
+//
+//	return 0;
+//}
+
+
+
+
+
+
+
+int main() {
+
+	/*vector<int> data;
+	data.assign(5, 10);
+	if (data.empty() == true)
+		cout << "벡터가 비었습니다.\n";
+	else {
+		for (int i = 0; i < data.size(); i++) {
+			cout << "data : " << i << " " << data.at(i) << endl;
+		}
+	}*/
+
+
+
+
+
+
+
+
+	//vector<int> data1({ 1,2,3 });
+	//vector<int> data2 = { 10,20,30 };
+	//
+	//data1.swap(data2);
+
+
+	//for (int i = 0; i < data1.size(); i++) {
+	//cout<< i << " "<< "data1 : " << data1.at(i)
+	//	     << " "<< "data2 : " << data2.at(i) << endl;
+	//	}
+	//data1.insert(data1.begin() + 1, 17);
+	//for (int i = 0; i < data1.size(); i++) {
+	//	cout << i << " " << "data1 : " << data1.at(i) << endl;
+	//
+	//}
+	//data2.erase(data2.begin() + 2);
+	//for (int i = 0; i < data2.size(); i++) {
+	//	cout << i << " " << "data2 : " << data2.at(i) << endl;
+
+	//}
+
+	//cout << endl << "push_back" << endl;
+	//data2.push_back(100);
+	//data2.push_back(200);
+	//data2.push_back(300);
+
+	//data2.erase(data2.begin() + 2);
+	//for (int i = 0; i < data2.size(); i++) {
+	//	cout << i << " " << "data2 : " << data2.at(i) << endl;
+	//}
+
+	//cout << endl << "insert #2" << endl;
+	//data2.insert(data2.end(), data1.begin(), data1.end());
+	//for (int i = 0; i < data2.size(); i++) {
+	//	cout << i << " " << "data2 : " << data2.at(i) << endl;
+	//}
+
+
+
+
+
+
+	//vector<int> number1({ 1,2,3,4,5 });
+	//vector<int> number2;
+
+	//copy(number1.begin(), number1.end(), back_inserter(number2));
+	//for (auto i : number2)
+	//	cout << i << endl;
+
+	//vector<double> number3({ 1.2,2.3,3.7,4.9,5.4 });
+	//vector<double> number4;
+
+	//copy(number3.begin(), number3.end(), back_inserter(number4));
+	//for (auto i : number4)
+	//	cout << i << endl;
+
+
+
+
+
+
+	vector<int> number({ 1,2,3,4,5 });
+
+	for (vector<int>::iterator iter = number.begin(); iter != number.end(); iter++)
+	{
+		cout << *iter << endl;
+	}
+
+	for (auto iter = number.cbegin(); iter != number.cend(); iter++) //cbegin을 쓰면 iter로 값을 수정할수없다(c->const)
+	{
+		cout << *iter << ", ";
+	}
+	cout << endl;
+
+	for (auto iter = number.rbegin(); iter != number.rend(); iter++)
+	{
+		cout << *iter << ", ";
+	}
+	cout << endl;
+
+	number.clear();
+
+	for (auto iter = number.cbegin(); iter != number.cend(); iter++) //cbegin을 쓰면 iter로 값을 수정할수없다(c->const)
+	{
+		cout << *iter << ", ";
+	}
+	cout << endl;
+
+	return 0;
+}

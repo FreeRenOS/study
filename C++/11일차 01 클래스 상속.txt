@@ -1,0 +1,170 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Employee {
+private:
+	string name;
+
+public:
+	//Employee() {}
+	Employee(string name) {
+		this->name = name;
+	}
+	void getName() const {
+		cout << "name : " << name << endl;
+	}
+	virtual int GetPay() const //가상함수를 만들어놓고 상속받은 클래스에서 기능을 구현하겠다
+	{
+		return 0;
+	}
+	virtual void ShowSalaryInfo() const {}
+};
+
+
+
+class PermanentWorker : public Employee
+{
+private:
+	int salary;
+
+public:
+
+	//PermanentWorker() : salary(0) {}
+	PermanentWorker(string name, int salary) : Employee(name) //상속받아서 초기화 해주겠다
+	{
+		this->salary = salary;
+	}
+
+	
+	int GetPay() const
+	{
+		return this->salary;
+	}
+	void ShowSalaryInfo() const
+	{
+		getName();
+		cout << "salary : " << GetPay() << endl;
+	}
+};
+
+class TemporaryWorker : public Employee
+{
+private :
+	int work_time;
+	int pay_per_hour;
+
+public:
+	TemporaryWorker(string name, int pay_per_hour) : Employee(name),
+		work_time(0),
+		pay_per_hour(pay_per_hour)
+	{}
+	
+	void AddWorkTime(int work_time)
+	{
+		this->work_time += work_time;
+	}
+
+	int GetPay() const
+	{
+		return work_time * pay_per_hour;
+	}
+	void ShowSalaryInfo() const
+	{
+		getName();
+		cout << "salary : " << GetPay() << endl;
+	}
+
+};
+
+class SalesWorker : public PermanentWorker
+{
+private:
+	int sales_result; //월 매출 실적
+	double bonus_ratio; // 상여금 지급 비율
+
+public:
+	//SalesWorker() :sales_result(0),bonus_ratio(0) {}
+	SalesWorker(string name, int salary, double bonus_ratio) : PermanentWorker(name, salary)
+	{
+		this->bonus_ratio = bonus_ratio;
+		this->sales_result = 0;
+	}
+	void AddSalesReuslt(int sales_result) {
+		this->sales_result += sales_result;
+	}
+	int GetPay() const {
+		return PermanentWorker::GetPay() + int(sales_result * bonus_ratio);
+	}
+	void ShowSalaryInfo() const
+	{
+		getName();
+		cout << "salary : " << GetPay() << endl;
+	}
+
+};
+
+
+
+class EmployeeHandler
+{
+private:
+	Employee* empList[50];
+	int empNum;
+
+public:
+	EmployeeHandler() : empNum(0), empList{0} {}
+	void AddEmployee(Employee* emp) {
+		empList[empNum++] = emp;
+	}
+	void ShowAllSalryInfo() const
+	{
+		for (int i = 0; i < empNum; i++) {
+			empList[i]->ShowSalaryInfo();
+			//(*emplist[i]).ShowSalaryInfo();
+
+		}
+	}
+	void ShowTotalSalary() const
+	{
+		long sum=0;
+		for (int i = 0; i < empNum; i++) {
+			sum += empList[i]->GetPay();
+		}
+		cout << "직원 급여 총합 : " << sum << endl;
+	}
+	~EmployeeHandler() {
+		for (int i = 0; i < empNum; i++) {
+			delete empList[i];
+		}
+	}
+};
+
+int main()
+{
+	EmployeeHandler handler;
+
+	handler.AddEmployee(new PermanentWorker("홍길동", 200));
+	handler.AddEmployee(new PermanentWorker("김철수", 350));
+	handler.AddEmployee(new PermanentWorker("박영수", 400));
+
+	TemporaryWorker* partTime1 = new TemporaryWorker("김나나", 7);
+	partTime1->AddWorkTime(40);
+	handler.AddEmployee(partTime1);
+
+
+	SalesWorker* sales1 = new SalesWorker("김영업", 500, 0.03);
+	sales1->AddSalesReuslt(7000);
+	handler.AddEmployee(sales1);
+
+	//이번달 직원급여 지출 정보
+	handler.ShowAllSalryInfo();
+
+	//이번달 직원 급여 지출 합
+	handler.ShowTotalSalary();
+	
+
+
+	return 0;
+}

@@ -1,0 +1,52 @@
+#include "person.h"
+using namespace std;
+
+
+int main()
+{
+	Person *pArr[3];
+	std::string name_str;
+	int age;
+
+	//int* pt = new int(5);
+	//cout << *pt << endl;
+	//delete pt;
+
+	for (int i = 0; i < 3; i++) {
+		std::cout << "이름 : ";
+		std::cin >> name_str;
+		std::cout << "나이 : ";
+		std::cin >> age;
+		pArr[i]=new Person(name_str,age);
+	}
+
+	for (int i = 0; i < 3; i++) {
+		pArr[i]->getPersonInfo();
+		//(*pArr[i]).getPersonInfo();
+		delete pArr[i];
+	}
+	return 0;
+}
+
+//차이 비교해보기
+//int main()
+//{
+//	Person pArr[3];
+//	std::string name_str;
+//	int age;
+//
+//	for (int i = 0; i < 3; i++) {
+//		std::cout << "이름 : ";
+//		std::cin >> name_str;
+//		std::cout << "나이 : ";
+//		std::cin >> age;
+//		pArr[i].setPersonInfo(name_str, age);
+//
+//	}
+//
+//	for (int i = 0; i < 3; i++)
+//		pArr[i].getPersonInfo();
+//
+//
+//	return 0;
+//}

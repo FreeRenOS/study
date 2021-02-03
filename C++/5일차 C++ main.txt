@@ -1,0 +1,297 @@
+// consoleapp.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+//
+
+
+#include <iomanip>
+#include <ios>
+
+#include "grade.h"
+#include "student_info.h"
+
+
+using namespace std;
+
+bool fgrade(const student_info& s);
+vector <student_info> extract_fails(vector<student_info>& students);
+vector <student_info> extract_fails2(vector<student_info>& students);
+vector <student_info> extract_fails3(vector<student_info>& students);
+void print_students_info(int maxlen, vector<student_info>& students);
+void print_iter_students_info(int maxlen, vector<student_info>& students);
+
+//struct student_info
+//{
+//	string name;
+//	double midterm, finalterm;
+//	vector<double> homework;
+//	student_info() : name(""), midterm(0), finalterm(0), homework() {};
+//};
+//
+//double grade(double midterm, double final, double homework);
+//double grade(double midterm, double finalterm, const vector<double>& hw);
+//double grade(const student_info& s);
+////double median(vector<double>vec);
+//
+//istream& read_homework(istream& in, vector<double>& homework);
+//istream& read(istream& is, student_info& s);
+//bool compare(const student_info& x, const student_info& y);//
+
+int main()
+{
+	vector<student_info> students;
+	student_info record;
+	string::size_type maxlen = 0;//제일 이름이 긴사람 크기를 구해서 출력할때 자리에 맞게 할려고
+	
+
+	
+	while (read(cin, record)) {
+		maxlen = max(maxlen, record.name.size());
+		students.push_back(record);
+	}
+	
+	vector<student_info> fail = extract_fails3(students);
+	
+	sort(fail.begin(), fail.end(), compare);
+	sort(students.begin(), students.end(), compare);
+	
+	//cout << endl << "fail" << endl;
+	//print_students_info(maxlen, fail);
+	//cout << endl << "pass" << endl;
+	//print_students_info(maxlen, students);
+
+	cout << endl << "fail" << endl;
+	print_iter_students_info(maxlen, fail);
+	cout << endl << "pass" << endl;
+	print_iter_students_info(maxlen, students);
+
+
+
+
+
+	//sort(students.begin(), students.end(),compare); //구조체 정렬은 무엇을 기준으로 비교할건지 던저줌
+	
+
+
+	//for (vector<student_info>::size_type i = 0; i < students.size(); i++) {
+	//	// 이름, 오른쪽 공백을 포함해서 maxlen+1 사이즈의 문자 출력
+	//	cout << students[i].name << string(maxlen + 1 - students[i].name.size(), ' ');
+
+	//	try {
+	//		double final_grade = grade(students[i]);
+	//		
+
+
+	//		streamsize prec = cout.precision(); //기존값 저장
+	//	//cout << result << endl; //기본값 총자리수 6자리
+	//		cout << "당신의 최종 점수는 :" 
+	//			<< fixed << setprecision(3) << final_grade << setprecision(prec);
+	//	
+	//	////fixed 소수점 아래 자리를 고정한다(4자리), fixed 없으면 총자리수(정수+소수) 4자리 
+	//	//cout.unsetf(ios::fixed);// 소수점 고정 해제
+	//	//cout << result;
+	//	}
+	//	catch(domain_error e){
+	//		cout << e.what();
+	//	}
+	//	cout<< endl;
+	//	
+	//}
+
+
+	return 0;
+
+}
+
+
+//학생의 합격여부를 결정하는 함수
+bool fgrade(const student_info& s)
+{
+	return grade(s) < 60;
+}
+// 1번째 버전 
+vector <student_info> extract_fails(vector<student_info>& students)
+{
+	vector <student_info> pass, fail;
+	for (vector<student_info>::size_type i = 0; i != students.size(); i++){
+		if (fgrade(students[i]))
+			fail.push_back(students[i]);
+		else
+			pass.push_back(students[i]);
+	}
+		students = pass;
+		return fail;
+}
+
+//2번째 버전
+vector <student_info> extract_fails2(vector<student_info>& students)
+{
+	vector <student_info> fail;
+	for (vector<student_info>::size_type i = 0; i != students.size(); i++) {
+		if (fgrade(students[i])) {
+			fail.push_back(students[i]);
+			students.erase(students.begin() + i);
+		}
+		else
+			i++;
+	}
+	
+	return fail;
+}
+
+//3번째 버전
+vector <student_info> extract_fails3(vector<student_info>& students)
+{
+	vector <student_info> fail;
+	vector<student_info>::iterator iter = students.begin();
+	while(iter != students.end()){
+	if (fgrade(*iter)) {
+			fail.push_back(*iter);
+			iter = students.erase(iter);
+		}
+		else
+			iter++;
+	}
+
+	return fail;
+}
+
+//인덱스 프린트
+void print_students_info(int maxlen, vector<student_info>& students)
+{
+	for (vector<student_info>::size_type i = 0; i < students.size(); i++) {
+		// 이름, 오른쪽 공백을 포함해서 maxlen+1 사이즈의 문자 출력
+		cout << students[i].name << string(maxlen + 1 - students[i].name.size(), ' ');
+
+		try {
+			double final_grade = grade(students[i]);
+
+
+
+			streamsize prec = cout.precision(); //기존값 저장
+		//cout << result << endl; //기본값 총자리수 6자리
+			cout << "당신의 최종 점수는 :"
+				<< fixed << setprecision(3) << final_grade << setprecision(prec);
+
+			////fixed 소수점 아래 자리를 고정한다(4자리), fixed 없으면 총자리수(정수+소수) 4자리 
+			//cout.unsetf(ios::fixed);// 소수점 고정 해제
+			//cout << result;
+		}
+		catch (domain_error e) {
+			cout << e.what();
+		}
+		cout << endl;
+	}
+}
+
+//반복자 프린트
+void print_iter_students_info(int maxlen, vector<student_info>& students)
+{
+	for (vector<student_info>::const_iterator iter = students.begin(); iter != students.end(); iter++) {
+		// 이름, 오른쪽 공백을 포함해서 maxlen+1 사이즈의 문자 출력
+		
+		cout << iter->name << string(maxlen + 1 - iter->name.size(), ' ');
+
+		try {
+			double final_grade = grade(*iter);
+
+
+
+			streamsize prec = cout.precision(); //기존값 저장
+		//cout << result << endl; //기본값 총자리수 6자리
+			cout << "당신의 최종 점수는 :"
+				<< fixed << setprecision(3) << final_grade << setprecision(prec);
+
+			////fixed 소수점 아래 자리를 고정한다(4자리), fixed 없으면 총자리수(정수+소수) 4자리 
+			//cout.unsetf(ios::fixed);// 소수점 고정 해제
+			//cout << result;
+		}
+		catch (domain_error e) {
+			cout << e.what();
+		}
+		cout << endl;
+	}
+}
+
+
+
+
+//double grade(double midterm, double finalterm, double homework) {
+//	return 0.2 * midterm + 0.4 * finalterm + 0.4 * homework;
+//}
+//
+//double grade(double midterm, double finalterm, const vector<double>& hw) {
+//	if (hw.size() == 0)
+//		throw domain_error("과제 데이터가 없습니다. grade 함수");
+//
+//	return grade(midterm, finalterm, median(hw));
+//}
+//
+//double grade(const student_info& s) {
+//	return grade(s.midterm, s.finalterm, s.homework);
+//}
+
+//double median(vector<double>vec) {
+//	//1. 점수의 존재 유무 확인
+//	typedef vector<double>::size_type vec_sz;
+//	vec_sz size = vec.size();
+//
+//	if (size == 0) {
+//		throw domain_error("과제 데이터가 없습니다. median 함수");
+//		//cout << endl << "입력한 과제 점수가 없습니다. 종료합니다.!" << endl;
+//		//return 1; //메인에서는 이렇게쓰면되는데 함수에서는 예외처리해야됨
+//	}
+//
+//	//2.정렬 sort <algorithm>
+//	sort(vec.begin(), vec.end());
+//
+//	//과제점수의 가운데값 median 구함
+//	vec_sz min = size / 2;
+//	double median;
+//	median = size % 2 == 0 ? (vec[min] + vec[min - 1]) / 2 : vec[min];
+//	return median;
+//}
+
+
+//istream& read_homework(istream& in, vector<double>& homework)
+//{
+//	if (in) {
+//		// 이전 내용 삭제
+//		homework.clear();
+//
+//		//과제 점수 읽기
+//		double x;
+//		while (in >> x) {
+//			homework.push_back(x);
+//		}
+//
+//		in.clear();
+//	}
+//
+//	return in;
+//}
+//
+//istream& read(istream& is, student_info& s)
+//{
+//	is >> s.name >> s.midterm >> s.finalterm;
+//	read_homework(is, s.homework);
+//	return is;
+//}
+//
+//
+//bool compare(const student_info& x, const student_info& y)
+//{
+//	return x.name < y.name;
+//}
+
+
+
+
+// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
+// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
+
+// 시작을 위한 팁: 
+//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
+//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
+//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
+//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
+//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
+//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.

@@ -1,0 +1,170 @@
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+typedef vector<string> Rule;
+typedef vector<Rule> Rule_collection;
+typedef map <string, Rule_collection> Grammar;
+vector<string> split(const string& s);
+Grammar read_grammar(istream& in);
+vector <string> gen_sentence(const Grammar& g);
+bool bracketed(const string& s);
+void gen_aux(const Grammar& g, const string& word, vector<string>& ret);
+int nrand(int n);
+
+
+int main() {
+
+	srand((unsigned int)time(0));
+
+	//문장 생성
+	vector <string>  sentence = gen_sentence(read_grammar(cin));
+
+	//첫 번째 단어 출력
+	vector <string>::const_iterator it = sentence.begin();
+	if (!sentence.empty()) {
+		cout << *it;
+		it++;
+	}
+
+	//공백과 함께 나머지 단어 출력
+	while (it != sentence.end()) {
+		cout << " " << *it;
+		it++;
+	}
+
+	cout << endl;
+
+	/*//입력 자료
+<noun> cat
+<noun> dog
+<noun> table
+<noun-phrase> <noun>
+<noun-phrase> <adjective> <noun-phrase>
+<adjective> large
+<adjective> brown
+<adjective> absurd
+<verb> jumps
+<verb> sits
+<location> on the stairs
+<location> under the sky
+<location> wherever it wants
+<sentence> the <noun-phrase> <verb> <location>
+*/
+
+
+
+	return 0;
+}
+
+
+Grammar read_grammar(istream& in)
+{
+	Grammar ret;
+	string line;
+	while (getline(in, line)) {
+		//입력 데이터를 단어로 나눔
+		vector<string> entry = split(line);
+		if (!entry.empty())
+			//카테고리 및 연관된 규칙을 맵에 저장
+			ret[entry[0]].push_back(Rule(entry.begin() + 1, entry.end()));
+
+
+	}
+
+	return ret;
+
+}
+
+vector <string> gen_sentence(const Grammar& g) 
+{
+	vector <string> ret;
+	gen_aux(g, "<sentence>", ret);
+	
+	return ret;
+}
+
+bool bracketed(const string& s)
+{
+	return s.size() > 1 && s[0] == '<' && s[s.size() - 1] == '>';
+}
+
+void gen_aux(const Grammar& g, const string& word, vector<string>& ret)
+{
+
+	if (!bracketed(word)) {
+		ret.push_back(word);
+	}
+	else {
+		//word 와 연관된 규칙을 찾음
+		Grammar::const_iterator it = g.find(word);
+		if (it == g.end())
+			throw logic_error("룰이 없다");
+
+		//선택 가능한 규칙을 모아 놓은 벡터를 가져옴
+		const Rule_collection& c = it->second;
+
+		//임의로 하나를 선택
+		const Rule& r = c[nrand(c.size())];
+
+		//선택한 규칙을 재귀적으로 확장
+		for (Rule::const_iterator i = r.begin(); i != r.end(); i++) {
+			gen_aux(g, *i, ret);
+		}
+
+	}
+
+}
+
+
+int nrand(int n)
+{
+	if (n <= 0 || n > RAND_MAX)
+		throw domain_error("랜덤 수의 범위를 벋어났다");
+
+	const int bucket_size = RAND_MAX / n;
+	int r;
+	do r = rand() / bucket_size;
+	while (r >= n);
+
+	return r;
+}
+
+
+
+
+
+
+
+vector<string> split(const string& s)
+{
+	vector<string> ret;
+	typedef string::size_type string_size;
+	string_size i = 0;
+	while (i != s.size()) {
+		while (i != s.size() && isspace(s[i])) {
+			//isspace 공백아닌 문자를 만날때까지 i 증가
+			i++;
+		}
+
+		string_size j = i; // 공백이 아닌 첫글자 위치j에 저장
+		while (j != s.size() && !isspace(s[j])) {
+			// !isspace 공백을 만날때까지 j 증가
+			j++;
+		}
+
+		if (i != j) {
+			//i에서 부터 j-i 개의 문자들을 s에 복사
+			ret.push_back(s.substr(i, j - i));
+			i = j;
+		}
+
+
+	}
+
+	return ret;
+}

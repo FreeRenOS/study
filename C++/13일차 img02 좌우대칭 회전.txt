@@ -1,0 +1,59 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	Mat img_src, img_dst, img_dst0, img_dst1;
+	
+	//절대경로
+	string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\crow.jpg";
+	//string filename = "images/crow.jpg";
+	
+	img_src = imread(filename, IMREAD_COLOR);
+
+	
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+	pyrDown(img_src, img_src); //이미지 사이즈 1/2로 줄임
+	
+	int width = img_src.cols;
+	int height = img_src.rows;
+
+	// 0 : 상하대칭, 1 : 좌우대칭, -1 : 좌우상하 대칭 
+	Mat M = getRotationMatrix2D(
+		Point(img_src.cols / 2.0, img_src.rows / 2.0), //회전시 중심점
+		200, // 회전 각도
+		1);	//이미지 배율( 1: 원래크기) 
+
+	warpAffine(img_src, img_dst, M, Size(width, height));
+
+	vconcat(img_src, img_dst, img_src); //src에 dst 를 아래에 붙이기
+
+	hconcat(img_src, img_dst, img_src); //src에 dst 를 옆에 붙이기
+
+	//flip(img_src, img_dst, -1);// 0 : 상하대칭, 1 : 좌우대칭, -1 : 좌우상하 대칭 
+	//flip(img_src, img_dst0, 0);
+	//flip(img_src, img_dst1, 1);
+		
+	/*imshow("Flip", img_dst);
+	imshow("Flipud", img_dst0);
+	imshow("Fliphr", img_dst1);*/
+	
+	namedWindow("Color");
+	imshow("Color", img_src);
+	imshow("Rotated", img_dst);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

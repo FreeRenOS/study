@@ -1,0 +1,147 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	cv::Mat img_src;
+
+	//절대경로
+	//string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\contour.png";
+	string filename = "50/13번 L50_NG.bmp";
+
+	img_src = imread(filename, IMREAD_COLOR);
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+	for (int i = 0; i < 2; i++)
+		pyrDown(img_src, img_src);
+
+	int width = img_src.cols;
+	int height = img_src.rows;
+
+	int x , y , w , h;
+	Rect rect1(x = 10, y = 100, w = 80, h = 150);
+	Rect rect2(x = 80, y = 190, w = 480, h = 80);
+	Rect rect3(x = 550, y = 100, w = 80, h = 150);
+
+	Mat img_dst1 = img_src(rect1);
+	Mat img_dst2 = img_src(rect2);
+	Mat img_dst3 = img_src(rect3);
+
+	
+
+	Mat img_gray;// 이미지를 그레이로 변환
+	cvtColor(img_src, img_gray, COLOR_BGR2GRAY);
+
+	Mat img_binary;// 임계값적용 해서 이진화 이미지를 생성
+	threshold(img_gray, img_binary, 100, 255, THRESH_BINARY);
+	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+	int iteration = 2;
+	Mat img_morph;
+	morphologyEx(img_binary, img_morph, MORPH_OPEN, kernel, Point(-1, -1), iteration);
+	
+
+	Mat img_tmp;
+	cvtColor(img_dst1, img_tmp, COLOR_BGR2GRAY);
+	threshold(img_tmp, img_tmp, 100, 255, THRESH_BINARY);
+	kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+	morphologyEx(img_tmp, img_tmp, MORPH_CLOSE, kernel, Point(-1, -1), iteration);
+	img_tmp.copyTo(img_morph(rect1));
+
+	//
+	//cvtColor(img_dst2, img_tmp, COLOR_BGR2GRAY);
+	//threshold(img_tmp, img_tmp, 100, 255, THRESH_BINARY);
+	//kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+	//morphologyEx(img_tmp, img_tmp, MORPH_CLOSE, kernel, Point(-1, -1), iteration);
+	//img_tmp.copyTo(img_morph(rect2));
+
+
+	//cvtColor(img_dst3, img_tmp, COLOR_BGR2GRAY);
+	//threshold(img_tmp, img_tmp, 100, 255, THRESH_BINARY);
+	//kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+	//morphologyEx(img_tmp, img_tmp, MORPH_CLOSE, kernel, Point(-1, -1), iteration+1);
+	//img_tmp.copyTo(img_morph(rect3));
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+	vector<vector<Point> > contours;
+	findContours(img_morph, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+
+	Scalar green(0, 255, 0);
+
+
+	for (size_t i = 0; i < contours.size(); i++) {
+		Scalar myColor(0, 255, 0);
+		double area = contourArea(contours[i]);
+
+		cout << i << " : " << area << endl;
+
+		Moments mu;
+		mu = moments(contours[i]);
+		int cx = static_cast<float> (mu.m10 / (mu.m00 + 1e-5));
+		int cy = static_cast<float> (mu.m01 / (mu.m00 + 1e-5));
+		Point aaa = contours[i][0];
+
+		if (area < 300)
+		myColor = Scalar(0, 0, 255);
+		circle(img_src, Point(cx, cy), 2, Scalar(0, 255, 255), -1);
+		putText(img_src, to_string(int(area)), Point(cx-24, cy+24), FONT_ITALIC, 0.5, myColor, 1);
+		putText(img_src,"X : "+to_string(int(cx)), Point(cx - 24, cy +40), FONT_ITALIC, 0.5, green, 1);
+		putText(img_src, "Y : " + to_string(int(cy)), Point(cx - 12, cy + 60), FONT_ITALIC, 0.5, green, 1);
+
+		/*if (area < 10000)
+			myColor = Scalar(0, 0, 255);*/
+
+		drawContours(img_src, contours, i, myColor, 1);
+		/*Point aaa = contours[i][0];
+		putText(img_src, to_string(int(area)), contours[i][0], FONT_ITALIC, 0.5, myColor, 1);
+		cout << "point(" << aaa.x << "," << aaa.y << ")\n";*/
+
+		/*Rect rect = boundingRect(contours[i]);
+		rectangle(img_src, rect, Scalar(255, 0, 0), 1);
+		Point2f points[4];
+		RotatedRect box = minAreaRect(contours[i]);
+		box.points(points);
+		for (int n = 0; n < 4; n++)
+			line(img_src, points[n], points[(n + 1) % 4], Scalar(255, 0, 255), 1);*/
+
+	}
+
+
+
+
+
+
+
+	namedWindow("Source");
+	imshow("Source", img_src);
+	imshow("Binary", img_binary);
+	//imshow("Gray", img_gray);
+	imshow("Morph", img_morph);
+	
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

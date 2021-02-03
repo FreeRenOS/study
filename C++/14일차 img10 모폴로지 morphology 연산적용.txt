@@ -1,0 +1,62 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	cv::Mat img_src;
+
+	//절대경로
+	//string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\contour.png";
+	string filename = "images/test2.jpg";
+
+	img_src = imread(filename, IMREAD_COLOR);
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+
+
+	pyrDown(img_src, img_src);
+
+	int width = img_src.cols;
+	int height = img_src.rows;
+
+
+	Mat img_gray; // 이미지를 그레이로 변환
+	cvtColor(img_src, img_gray, COLOR_BGR2GRAY);
+
+	Mat kernel = getStructuringElement(MORPH_RECT, Size(7, 7));
+
+	Mat img_dst;
+	int iteration = 3;
+	//erode(img_gray, img_dst, kernel, Point(-1, -1), iteration); //Point(-1,-1) : 픽셀 가운데점에 적용을 한다
+	//morphologyEx(img_gray, img_dst, MORPH_ERODE, kernel, Point(-1, -1), iteration);
+	//dilate(img_gray, img_dst, kernel, Point(-1, -1), iteration);
+	//morphologyEx(img_gray, img_dst, MORPH_DILATE, kernel, Point(-1, -1), iteration);
+
+	//MORPH_OPEN : erode-> dilate
+	//morphologyEx(img_gray, img_dst, MORPH_OPEN, kernel, Point(-1, -1), iteration);
+
+	//MORPH_CLOSE : : dilate -> erode 
+	morphologyEx(img_gray, img_dst, MORPH_CLOSE, kernel, Point(-1, -1), iteration);
+
+
+
+
+
+	namedWindow("Source");
+	imshow("Source", img_src);
+	imshow("Result", img_dst);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

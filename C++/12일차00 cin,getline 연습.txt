@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+
+
+	//string passward;
+	//int count = 1;
+	//while (true) {
+
+	//	cout << "암호를 입력하세요 : ";
+
+	//	cin >> passward;
+
+	//	//strcmp
+	//	if (passward.compare("aabbcc") == 0) {
+	//		cout << "정상 종료합니다" << endl;
+	//		break;
+	//	}
+	//	else
+	//	{
+	//		cout << count << "번 " << "암호가 틀렸습니다" << endl;
+	//		count++;
+	//	}
+	//	if (count == 6) {
+	//		cout << "(암호오류) 프로그램 종료합니다" << endl;
+	//		break;
+	//	}
+	//}
+	
+
+
+
+
+
+
+	//char address[100];
+	//cout << "주소를 입력하세요 \n";
+	//cin.getline(address, 100);
+	//cout << address << endl;
+
+
+
+
+
+
+
+
+	//string address;
+	//getline(cin, address);
+	//cout << address << endl;
+
+	
+
+
+
+
+
+
+	char a[100], b[100], c[100];
+	cin >> a;
+	cin.getline(b, 100);//cin 에서 a를 넘겨주고 '\n'남겨진 상태라서 빈값이 들어감
+	cin.getline(c, 100);
+	cout << "a : " << a << endl;
+	cout << "b : " << b << endl;
+	cout << "c : " << c << endl;
+
+
+	return 0;
+}

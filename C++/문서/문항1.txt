@@ -1,0 +1,29 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <time.h>
+
+using namespace std;
+
+int main()
+{
+	//[문항1]
+
+	vector<double> Num = { 1,-2,3,-5,8,-3 };
+	vector<double> filter;
+
+
+	copy_if(Num.begin(), Num.end(), back_inserter(filter), [](const auto& num) {return num > 0; });
+
+
+	for (auto i = filter.begin(); i < filter.end(); i++) {
+		cout << *i << endl;
+	}
+
+	for(auto& i : filter){
+	cout << i << "\t";
+	}
+
+	return 0;
+}

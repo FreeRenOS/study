@@ -1,0 +1,251 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <string.h>
+
+__int64 factorial(int num) //팩도리알 계산
+{
+	__int64 sum=1;
+	for (int i = 1; i <= num; i++)
+	{
+		sum *= i;
+		printf("%lld\n", sum);
+	}
+	return sum;
+}
+
+void rotto() //중복제거 기능없음
+{
+	srand((unsigned)time(NULL));
+	int i,temp;
+	int ro[6];
+	for (i = 0; i < 6; i++)
+	{
+		temp = rand() % 45;
+		ro[i] = temp;
+		printf("%d\n",ro[i] );
+	}
+}
+
+int f(int n)//재귀함수 n까지 계속 더하기
+{
+	int sum=0;
+	if (n == 1)
+		sum = 1;
+	else
+		sum = f(n - 1) + n;
+	printf("%d\n", sum);
+	return sum;
+}
+
+char upper(char ch) // 대문자로 변환
+{
+	return ch - ('a' - 'A');
+}
+char lower(char ch) // 소문자로 변환
+{
+	return ch + ('a' - 'A');
+}
+
+
+
+int main()
+{
+	/*__int64 num;
+	printf("알고싶은 팩토리얼 값은 : ");
+	scanf_s("%lld",&num);
+	num=factorial(num);*/
+
+
+	//rotto();
+
+	/*float a = 2.99f;
+	printf("%.2f : %d\n", a, (int)a);
+	printf("round : %.2f : %d\n", a, (int)(a + 0.5f));
+	printf("ceil : %.2f : %d\n", a, (int)ceil(a));
+	printf("floor : %.2f : %d\n", a, (int)floor(a));*/
+
+	/*int sum1;
+	sum1=f(1);
+	printf("%d", sum1);*/
+	
+	//char star[5]="abc";	//문자열 ""
+	//star[1] = '1';		// 문자''
+	//printf("%s\n", star);
+
+
+
+
+	/*char in[50], out[50];
+
+	printf("대소문자 변환할 문자열 : ");
+	scanf_s("%s", in,sizeof(char));*/
+
+	//int aa[4];
+	//int sum = 0;
+	//for (int i = 0; i < sizeof(aa)/sizeof(int); i++) //sizeof(aa)=16비트
+	//{
+	//	printf("%d 번째 숫자를 입력하세요", i + 1);
+	//	scanf_s("%d", &aa[i]);
+	//	sum += aa[i];
+	//}
+	//printf("합계는 : %d\n", sum);
+
+
+
+	/*srand((unsigned)time(NULL)); // 6면주사위 10000번돌리고 각면 횟수
+	int yu[6] = {0};
+	
+	for(int i=0; i<10000; i++)
+		yu[rand() % 6] += 1;
+
+	printf("면 빈도\n");
+
+	for(int i=0; i<6; i++)
+		printf("%d %5d\n",i+1, yu[i]);*/
+
+
+	//char ch[50],ch2[50]; //문자열 마지막에 null(=0)값있어야됨
+	//printf("문자열을 입력하시오 scanf_s :");
+	//scanf_s("%s", ch,sizeof(ch));
+	//printf("%s\n", ch);
+
+	//printf("문자열 길이 : %d", strlen(ch));
+
+	/*printf("문자열을 입력하시오 gets :");
+	gets(ch2);
+	printf("%s\n", ch2);*/
+	
+
+	/*
+	int prices[10] = { 12,3,19,6,18,8,12,4,1,19 };
+
+	for (int i = 0; i < sizeof(prices)/sizeof(int); i++)
+	{
+		int temp = 0;
+		if (prices[i] <= prices[i + 1]) //작은값이면 교체
+		{
+			temp = prices[i + 1];
+			prices[i + 1] = prices[i];
+			prices[i] = temp;
+		}
+	}
+	for (int i = 0; i < sizeof(prices) / sizeof(int); i++)
+	printf("%3d\n", prices[i]);
+
+	printf("최소값은 :%d ", prices[9]);
+	*/
+
+	/*
+	int prices[10] = { 12,3,19,6,18,8,12,4,1,19 };
+	for (int i = 0; i < sizeof(prices) / sizeof(int); i++)
+		printf("%3d\n", prices[i]);
+
+	int temp = prices[0];
+	for (int i = 0; i < sizeof(prices) / sizeof(int); i++)
+	{
+		if (temp <= prices[i + 1])
+		{
+			temp = prices[i + 1];
+		}
+	}
+	printf("최대값은 :%d ", temp );
+	*/
+
+	/*int list[10] = { 10,20,30,40,50,60,70,80,90,100 };
+	int num;
+	
+	for (int i = 0; i < sizeof(list) / sizeof(int); i++)
+		printf("%4d",list[i]);
+
+	printf("\n");
+	printf("탐색할 값을 입력하시오 : ");
+	scanf_s("%d", &num);
+
+	for (int i = 0; i < sizeof(list) / sizeof(int); i++)
+	{
+		if (list[i] == num)
+		{
+			printf("탐색 성공 인덱스 = %d", i);
+			break;
+		}
+
+	}*/
+
+	//char ch[50];
+	//char tt[50];
+	//int count;
+	//printf("문자열을 입력하세요 : ");
+	//scanf_s("%s", ch, sizeof(ch));
+	//count = strlen(ch);
+	//for (int i = 0; i <count; i++)
+	//{
+	//	tt[i] = ch[count-(i+1)];
+	//}
+	//printf("내용을 거꾸로 출력 =>");
+	//tt[count] = NULL;//문자열 배열 마지막에 널 넣는다
+	//
+	//printf("%s", tt);
+	
+
+	//char ss[100],tt[100];
+	//int count;
+	//printf("문자 입력 : ");
+	//gets_s(ss,sizeof(ss));			//gets도 gets_s sizeof 쓰자
+	//count = strlen(ss);
+	//for (int i = 0; i < count; i++)
+	//{
+	//	if (('A' <= ss[i]) && (ss[i] <= 'Z'))
+	//		tt[i] = lower(ss[i]);			//'a' - 'A'차이만큼 더해준다
+	//	else if (('a' <= ss[i]) && (ss[i] <= 'z'))
+	//		tt[i] = ss[i] - ('a' - 'A');	//'a' - 'A'차이만큼 빼준다
+	//	else
+	//		tt[i] = ss[i];
+	//}
+	//tt[count] = NULL;
+	//printf("변환된 문자 => %s", tt);
+
+
+
+	/*int gugu[10][10];
+	for (int i = 1; i < 10; i++)
+	{
+		for (int k = 1; k < 10; k++)
+		{
+			gugu[i][k] = k * i;
+			printf(" %2d * %2d = %2d", k, i, gugu[i][k]);
+		}
+		printf("\n");
+	}*/
+
+
+	/*char ss[100], tt[100];
+	char n1, n2;
+	int count;
+
+	printf("여러 글자를 입력 : ");
+	gets_s(ss, sizeof(ss));
+
+	printf("기존 문자와 새로운 문자 : ");
+	scanf_s("%c %c", &n1 , sizeof(n1), &n2, sizeof(n2));
+	count = strlen(ss);
+	for (int i = 0; i < count; i++)
+	{
+		if (ss[i] == n1)
+			tt[i] = n2;
+		else
+			tt[i] = ss[i];
+	}
+	tt[count] = NULL;
+
+	printf("변환된 결과 => ");
+	printf("%s", tt);*/
+
+
+
+
+
+
+	return 0;
+}

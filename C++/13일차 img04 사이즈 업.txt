@@ -1,0 +1,63 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	Mat img_src, img_dst;
+	
+	//절대경로
+	string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\crow.jpg";
+	//string filename = "images/crow.jpg"; //루트 경로
+	
+	img_src = imread(filename, IMREAD_COLOR);
+
+	
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+	for(int i=0; i<2; i++) 
+	pyrDown(img_src, img_src); //이미지 사이즈 1/2로 줄임
+	
+	int width = img_src.cols;
+	int height = img_src.rows;
+
+	
+	//이미지 두배 키우기 
+	//void cv::resize(InputArray src, OutputArray dst, Size dsize, double fx=0, double fy=0
+	//				interpoloation = INTER_CUBIC)
+	// src : 원본 이미지
+	// dst : 결과 이미지
+	// dszie: 결과 이미지의 크기
+	//fx,fy : 수평 수직 방향 크기 조정 비율
+	//interpoloation : 보간법
+	
+	//2배 키우기
+	//resize(img_src, img_dst, Size(), 2, 2, INTER_CUBIC); //INTER_CUBIC 방식으로 키움
+	
+	//3배 키우기
+	//resize(img_src, img_dst, Size(3* width,3* height), INTER_CUBIC);
+
+	//0.5배 키우기
+	resize(img_src, img_dst, Size(), 0.5, 0.5, INTER_CUBIC);
+
+
+
+	//pyrUp(img_src, img_dst, Size(width * 2, height * 2),BORDER_DEFAULT);
+	
+	namedWindow("Color");
+	imshow("Color", img_src);
+	imshow("pyrup", img_dst);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

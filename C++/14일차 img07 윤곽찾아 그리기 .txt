@@ -1,0 +1,83 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	cv::Mat img_src, img_dst;
+
+	//절대경로
+	string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\ttt.png";
+	//string filename = "images/crow.jpg";
+
+	img_src = imread(filename, IMREAD_COLOR);
+
+
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+
+
+	Mat img_gray;
+	cvtColor(img_src, img_gray, COLOR_BGR2GRAY);
+	
+	Mat img_binary;
+	threshold(img_gray, img_binary, 128, 255, THRESH_BINARY_INV);
+
+	vector<vector<Point> > contours;
+	findContours(img_binary, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+
+
+	// 검색방법
+	// RERT_EXTERNAL : 외각 윤곽선만 검출하고 계구조를 구성하지 않음
+	// RETR_LIST : 모든 윤곽선을 검출하며, 계층구조를 구성하지 않음
+	// RETR_CCOMP : 모든 윤곽선을 검출하며, 계층구조는 2단계로 구성
+	// RETR_TREE : 모든 윤곽선을 검출하며, 계층구조를 모두 형성(Tree구조)
+
+	/*//근사화방법
+	CHAIN_APPROX_NONE : 윤곽선점들의 모든 점을 반환
+	CHAIN_APPROX_SIMPLE : 윤곽선점들 단순화 수평, 수직 대각선 요소를 압축 하고 끝점만 남김
+	CHAIN_APPROX_TC89_L1 : 프리먼 체인코드에서의 윤관선 적용
+	CHAIN_APPROX_TC89_KCOS : 프리먼 체인코드에서의 윤곽선 적용
+
+	*/
+
+
+
+	for (size_t i = 0; i < contours.size(); i++) {
+		Scalar myColor(0, 255, 0);
+		double area = contourArea(contours[i]);
+		cout << i << " : " << area << endl;
+
+		if (area < 10000) 
+		myColor= Scalar(0, 0, 255);
+			
+		drawContours(img_src, contours, i, myColor, 1);
+		Point aaa = contours[i][0];
+		cout << "point(" << aaa.x << "," << aaa.y << ")\n";
+		
+	}
+
+
+
+
+	
+
+
+
+	namedWindow("Source");
+	imshow("Source", img_src);
+	imshow("dest", img_binary);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

@@ -1,0 +1,40 @@
+#ifndef _person_h
+#define _person_h
+
+#include <iostream>
+
+
+class Person
+{
+private:
+	std::string name;
+	int age;
+
+public:
+	Person() {
+		name = "";
+		age = 0;
+		std::cout << "Person 생성" << std::endl;
+
+
+	}
+	Person(std::string myname, int myage) {
+
+		name = myname;
+		age = myage;
+	}
+	void setPersonInfo(std::string myname, int myage) {
+		name = myname;
+		age = myage;
+	}
+	void getPersonInfo() const {
+		std::cout << "이름은 : " << name << std::endl;
+		std::cout << "나이는 : " << age << std::endl;
+	}
+	~Person() {
+		std::cout << "소멸자 (destructor) 호출" << std::endl;
+	}
+
+};
+
+#endif

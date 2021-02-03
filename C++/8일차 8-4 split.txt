@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <iterator>
+#include <algorithm>
+#include <cctype>
+
+using namespace std;
+bool space(char c);
+bool not_space(char c);
+template <class Out>
+void split(const string& str, Out os);
+
+
+//template <typename T>
+//T Plus(T x, T y, T z = 1)
+//{
+//    return x + y + z;
+//}
+
+int main()
+{
+    //int n1 = Plus(1, 2);
+    //int n2 = Plus(1, 2, 3);
+    //double n3 = Plus(1.1, 2.2);
+    //double n4 = Plus(1.1, 2.2, 3.3);
+    //cout << "결과값 : " << n1 << ", " << n2 << ", " << n3 << ", " << n4 << endl;
+    
+	string s;
+	while (getline(cin, s))
+		split(s, ostream_iterator<string>(cout, "\n"));
+
+
+	return 0;
+}
+
+bool space(char c)
+{
+	return isspace(c);
+}
+
+bool not_space(char c)
+{
+	return !isspace(c);
+}
+
+
+template <class Out>
+void split(const string& str, Out os)
+{
+
+	typedef string::const_iterator iter;
+	iter i = str.begin();
+
+	while (i != str.end()) {
+		//선행 공백 무시
+		i = find_if(i, str.end(), not_space); //not_space 대신 !isspace 사용하면 오류남
+
+		//다음 단어의 끝을 찾음
+		iter j = find_if(i, str.end(), space);
+
+		//[i,j] 범위의 문자를 복사
+		if (i != str.end())
+			*os++ = string(i, j);
+
+		i = j;
+
+	}
+
+}

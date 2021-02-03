@@ -1,0 +1,14 @@
+#include "NameCard.h"
+
+using namespace COM_POS;
+
+int main()
+{
+	NameCard manClerk("Lee", "ABCorp", "010-1111-2222", CLERK);
+	NameCard manSENIOR("Hong", "OrangeEng", "010-3333-4444", SENIOR);
+	NameCard manAssist("Kim", "GoodCom", "010-5555-6666", ASSIST);
+	manClerk.ShowNameCardInfo();
+	manSENIOR.ShowNameCardInfo();
+	manAssist.ShowNameCardInfo();
+	return 0;
+}

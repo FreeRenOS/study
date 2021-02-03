@@ -1,0 +1,216 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <stdexcept>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+struct student_info
+{
+	string name;
+	double midterm, finalterm;
+	vector<double> homework;
+	student_info() : name(""), midterm(0), finalterm(0), homework() {};
+};
+
+bool did_all_hw(const student_info& s);
+double grade_aux(const student_info& s);
+double median_analysis(const vector<student_info>& students);
+void write_analysis(ostream& out, const string& name, double analysis(const vector<student_info>&),
+		const vector<student_info>& did, const vector<student_info>& didnt);
+double average(const vector<double>& v);
+double average_grade(const student_info& s);
+double average_analysis(const vector<student_info>& students);
+double optimistic_median(const student_info& s);
+double optimistic_median_analysis(const vector<student_info>& students);
+
+istream& read_homework(istream& in, vector<double>& homework);
+istream& read(istream& is, student_info& s);
+
+
+double grade(double midterm, double finalterm, double homework);
+double grade(double midterm, double finalterm, const vector<double>& hw);
+double grade(const student_info& s);
+double median(vector<double> vec);
+
+
+
+int main() {
+	//모든 과제를 제출한 학생과 그렇지 않은 학생
+	vector <student_info> did, didnt;
+	//학생 정보를 읽고 분류
+	student_info student;
+
+	while (read(cin, student)) {
+		if (did_all_hw(student))
+			did.push_back(student);
+		else
+			didnt.push_back(student);
+	}
+
+	//두 집단에 데이터가 있는지 각각 확인하여 분석할 필요가 있는지 확인
+
+	if (did.empty()) {
+		cout << "과제를 제출한 학생이 없다" << endl;
+		return 1;
+	}
+
+	if (didnt.empty()) {
+		cout << "모든 학생이 과제를 제출했다" << endl;
+		return 1;
+	}
+
+	write_analysis(cout, "median", median_analysis, did, didnt);
+	write_analysis(cout, "average", average_analysis, did, didnt);
+	write_analysis(cout, "median of homework turned in", optimistic_median_analysis, did, didnt);
+
+
+
+	return 0;
+}
+
+
+bool did_all_hw(const student_info& s)
+{
+	//과제가 0인 부분을 찾아서 위치와 끝위치 비교해서 같으면 참 다르면 거짓(참이면 0이 없다)
+	return ((find(s.homework.begin(), s.homework.end(), 0)) == s.homework.end());
+	
+}
+
+double grade_aux(const student_info& s)
+{
+	try {
+		return grade(s);
+	}
+	catch (domain_error) {
+		return grade(s.midterm, s.finalterm, 0);
+	}
+}
+
+
+double median_analysis(const vector<student_info>& students)
+{
+	vector<double> grades;
+	transform (students.begin(), students.end(),
+		back_inserter(grades), grade_aux);
+	return median(grades);
+}
+
+void write_analysis(ostream& out, const string& name, double analysis(const vector<student_info>&),
+	const vector<student_info>& did,
+	const vector<student_info>& didnt)
+{
+	out << name << ": median(did) = " << analysis(did) <<
+		", median(didnt) = " << analysis(didnt) << endl;
+}
+
+double average(const vector<double>& v) 
+{
+	return accumulate(v.begin(), v.end(), 0.0) / v.size();
+}
+
+double average_grade(const student_info& s)
+{
+	return grade(s.midterm, s.finalterm, average(s.homework));
+}
+
+double average_analysis(const vector<student_info>& students)
+{
+	vector<double> grades;
+	transform(students.begin(), students.end(), back_inserter(grades), average_grade);
+	return median(grades);
+}
+
+double optimistic_median_analysis(const vector<student_info>& students)
+{
+	vector<double> grades;
+	transform(students.begin(), students.end(), back_inserter(grades), optimistic_median);
+	return median(grades);
+}
+
+
+double optimistic_median(const student_info& s)
+{
+	vector<double> nonzero;
+	remove_copy(s.homework.begin(), s.homework.end(), back_inserter(nonzero), 0);
+
+	if (nonzero.empty())
+		return grade(s.midterm, s.finalterm , 0);
+	else
+		return grade(s.midterm, s.finalterm, median(nonzero));
+
+}
+
+
+
+
+
+
+istream& read(istream& is, student_info& s)
+{
+	//학생의 이름,중간,기말 시험 점수 저장
+	is >> s.name >> s.midterm >> s.finalterm;
+	read_homework(is, s.homework);//학생의 모든과제 점수 저장
+	return is;
+}
+
+
+istream& read_homework(istream& in, vector<double>& homework)
+{
+	if (in) {
+		// 이전 내용 삭제
+		homework.clear();
+
+		//과제 점수 읽기
+		double x;
+		while (in >> x) {
+			homework.push_back(x);
+		}
+
+		in.clear();
+	}
+
+	return in;
+}
+
+
+
+double grade(double midterm, double finalterm, double homework) {
+	return 0.2 * midterm + 0.4 * finalterm + 0.4 * homework;
+}
+
+double grade(double midterm, double finalterm, const vector<double>& hw) {
+	if (hw.size() == 0)
+		throw domain_error("과제 데이터가 없습니다. grade 함수");
+
+	return grade(midterm, finalterm, median(hw));
+}
+
+double grade(const student_info& s) {
+	return grade(s.midterm, s.finalterm, s.homework);
+}
+
+double median(vector<double> vec) {
+	//1. 점수의 존재 유무 확인
+	typedef vector<double>::size_type vec_sz;
+	vec_sz size = vec.size();
+
+	if (size == 0) {
+		throw domain_error("벡터가 비었습니다. median 함수");
+	}
+		//cout << endl << "입력한 과제 점수가 없습니다. 종료합니다.!" << endl;
+		//return 1; //메인에서는 이렇게쓰면되는데 함수에서는 예외처리해야됨
+	
+
+	//2.정렬 sort <algorithm>
+	sort(vec.begin(), vec.end());
+
+	//과제점수의 가운데값 median 구함
+	vec_sz min = size / 2;
+	double median;
+	median = size % 2 == 0 ? (vec[min] + vec[min - 1]) / 2 : vec[min];
+
+	return median;
+}

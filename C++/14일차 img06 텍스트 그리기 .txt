@@ -1,0 +1,117 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	// 이미지판 만들기
+	int width = 640;
+	int height = 640;
+	Mat img(height, width, CV_8UC3, Scalar(0, 0, 0));
+	// CV_8UC3 : 2에 8승 8비트= 255 , unc 정수, 3채널
+
+	Scalar red(0, 0, 255);
+	Scalar green(0, 255, 0);
+	Scalar yellow(0, 255, 255);
+	int thickness = 0;
+
+	////이미지 정보확인
+	//int img_h = img.rows;
+	//int img_w = img.cols;
+	//int img_bpp = img.channels();
+	//cout << img_h << " " << img_w << " " << img_bpp << endl;
+
+
+
+	////선그리기
+	////line(이미지,시작점,끝점,색깔,선두께);
+	//line(img, Point(0, 0), Point(width - 1, height - 1), Scalar(0, 0, 255), 3);//끝에서 -1
+	//line(img, Point(width - 1, 0), Point(0, height - 1), Scalar(0, 255, 0), 3);
+
+	////타원그리기
+	//Point center(int(width / 2), int(height / 2));
+	//ellipse(img, center, Size(200, 30), 10, 90, 180, Scalar(0, 255, 255), -1);
+	//Size (좌우크기, 상하크기),타원각동,그리기시작각도,끝각도,색깔(),굵기
+
+
+	//// 폴리곤 그리기
+	//vector<Point> contour;
+	//contour.push_back(Point(315, 40));
+	//contour.push_back(Point(570, 240));
+	//contour.push_back(Point(475, 550));
+	//contour.push_back(Point(150, 550));
+	//contour.push_back(Point(50, 240));
+
+	//const Point* pts1 = (const cv::Point*) Mat(contour).data;
+	//int npts1 = Mat(contour).rows;
+
+	//polylines(img, &pts1, &npts1, 1, true, red, thickness);
+
+	//contour.clear();
+
+	//
+	//contour.push_back(Point(315, 160));
+	//contour.push_back(Point(150, 280));
+	//contour.push_back(Point(210, 480));
+	//contour.push_back(Point(420, 480));
+	//contour.push_back(Point(480, 280));
+
+	//const Point* pts2 = (const cv::Point*) Mat(contour).data;
+	//int npts2 = Mat(contour).rows;
+
+	//polylines(img, &pts2, &npts2, 1, true, green, thickness);
+
+	//contour.clear();
+
+	//contour.push_back(Point(320, 240));
+	//contour.push_back(Point(410, 315));
+	//contour.push_back(Point(380, 415));
+	//contour.push_back(Point(265, 415));
+	//contour.push_back(Point(240, 315));
+
+	//const Point* pts3 = (const cv::Point*) Mat(contour).data;
+	//int npts3 = Mat(contour).rows;
+
+	//fillPoly(img, &pts3, &npts3, 1, yellow);
+
+	//contour.clear();
+
+
+	//텍스트 그리기
+	int center_x = width / 2;
+	int center_y = height / 2;
+	Point location(center_x - 200, center_y - 100);
+	int font = FONT_ITALIC;
+	double fontScale = 3;
+	putText(img, "OpenCv", location, font, fontScale, green, thickness);
+
+
+	//FONT_HERSHEY_SIMPLEX   보통 크기의 산세리프 글꼴 -
+	//FONT_HERSHEY_PLAIN   작은 크기의 산세리프 글꼴 -
+	//FONT_HERSHEY_DUPLEX   보통 크기의 산세리프 글꼴   정교함
+	//FONT_HERSHEY_COMPLEX   보통 크기의 세리프 글꼴 -
+	//FONT_HERSHEY_TRIPLEX   보통 크기의 세리프 글꼴   정교함
+	//FONT_HERSHEY_COMPLEX_SMALL   작은 크기의 손글씨 글꼴 -
+	//FONT_HERSHEY_SCRIPT_SIMPLEX   보통 크기의 손글씨 글꼴 -
+	//FONT_HERSHEY_SCRIPT_COMPLEX   보통 크기의 손글씨 글꼴   정교함
+	//FONT_ITALIC   기울임 꼴
+
+
+	//텍스트 시작점에 선그리기
+	//line(이미지,시작점,끝점,색깔,선두께);
+	line(img, Point(0, center_y - 100), Point(width - 1, center_y - 100), Scalar(255, 255, 255), 1);//끝에서 -1
+	line(img, Point(center_x - 200, 0), Point(center_x - 200, height - 1), Scalar(255, 255, 255), 1);
+
+
+
+	imshow("result", img);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

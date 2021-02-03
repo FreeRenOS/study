@@ -1,0 +1,76 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	cv::Mat img_color,img_gray;
+	
+	
+	Mat bgr[3];
+	
+
+
+	
+	//절대경로
+	string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\crow.jpg";
+	//string filename = "images/crow.jpg";
+	
+	img_color = imread(filename, IMREAD_COLOR);
+	
+
+	if (img_color.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+
+	
+
+
+
+	//cout << "이미지의 가로는 : " << img_color.cols << endl;
+	//cout << "이미지의 세로는 : " << img_color.rows << endl;
+
+	cout << "이미지의 가로는 : " << img_color.size().width << endl;
+	cout << "이미지의 세로는 : " << img_color.size().height << endl;
+	cout << "이미지의 채널는 : " << img_color.channels() << endl;
+
+
+	pyrDown(img_color, img_color); //이미지 사이즈 1/2로 줄임
+	cvtColor(img_color, img_gray, COLOR_BGR2GRAY); //회색으로 변경
+
+
+	Mat zeroMat = Mat::zeros(img_color.size(), CV_8UC1); //값을 제로로...
+
+	split(img_color, bgr); // BGR 3원소로 나눈다
+
+	Mat B[] = { bgr[0], zeroMat,zeroMat };
+	Mat G[] = { zeroMat, bgr[1],zeroMat };
+	Mat R[] = { zeroMat, zeroMat,bgr[2] };
+
+
+	merge(B, 3, bgr[0]);
+	merge(G, 3, bgr[1]);
+	merge(R, 3, bgr[2]);
+
+
+	namedWindow("Color");
+	//imshow("Color", img_color);
+	//imshow("Gray", img_gray);
+
+	imshow("Blue", bgr[0]);
+	imshow("Green", bgr[1]);
+	imshow("Red", bgr[2]);
+
+	
+	
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

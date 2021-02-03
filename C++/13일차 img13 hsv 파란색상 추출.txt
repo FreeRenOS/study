@@ -1,0 +1,47 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	Mat img_src, img_hsv, img_dst;
+
+	//절대경로
+	//string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\whitebutterfly.jpg";
+	string filename = "images/tomato.jpg"; //루트 경로
+
+	img_src = imread(filename, IMREAD_COLOR);
+
+
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+	for (int i = 0; i < 1; i++)
+		pyrDown(img_src, img_src); //이미지 사이즈 1/2로 줄임 
+
+	int width = img_src.cols;
+	int height = img_src.rows;
+	//-----------------------------------------------------------
+	cvtColor(img_src, img_hsv, COLOR_BGR2HSV);
+	Mat img_mask;
+	Vec3b lower_blue = Vec3b(120 - 20, 70, 0);
+	Vec3b upper_blue = Vec3b(120 + 20, 255, 255);
+	inRange(img_hsv, lower_blue, upper_blue, img_mask);
+	bitwise_and(img_src, img_src, img_dst, img_mask);
+
+
+	namedWindow("Color");
+	imshow("Color", img_src);
+	imshow("Hsv", img_hsv);
+	imshow("Result", img_dst);
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

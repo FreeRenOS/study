@@ -1,0 +1,61 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	cv::Mat img_src, img_dst;
+
+	//절대경로
+	//string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\contour.png";
+	string filename = "images/test1.jpg";
+
+	img_src = imread(filename, IMREAD_COLOR);
+
+
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+
+
+	Mat img_gray; // 이미지를 그레이로 변환
+	cvtColor(img_src, img_gray, COLOR_BGR2GRAY);
+
+	Mat img_binary; // 임계값적용 해서 이진화 이미지를 생성
+	threshold(img_gray, img_binary, 128, 255, THRESH_BINARY_INV);
+
+	vector<vector<Point> > contours;
+	findContours(img_binary, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+
+	Scalar green(0, 255, 0);
+	drawContours(img_src, contours, -1, green, 1);
+
+
+	for (size_t i = 0; i < contours.size(); i++) {
+		double area = contourArea(contours[i]);
+		Moments mu;
+		mu = moments(contours[i]);
+		int cx = static_cast<float> (mu.m10 / (mu.m00 + 1e-5));
+		int cy = static_cast<float> (mu.m01 / (mu.m00 + 1e-5));
+		circle(img_src, Point(cx, cy), 5, Scalar(0, 255, 255), -1);
+		putText(img_src, to_string(int(area)), Point(cx - 22, cy + 22), FONT_ITALIC, 0.5, green, 1);
+
+
+	}
+
+	namedWindow("Source");
+	imshow("Source", img_src);
+	imshow("dest", img_binary);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

@@ -1,0 +1,317 @@
+#include <stdio.h>
+
+int main()
+{
+	/*
+	int n = 123;
+	float pi = 3.141592;
+	printf("%-5d\n", n);
+	printf("%7.2f\n", pi);
+	*/
+
+
+
+	//삼항연산자 > ? :
+
+
+
+	/*
+	int a, b;
+	a = 1;
+	b = a++;
+	printf("1 => b:%d\n", b);
+	a = 1;
+	b = ++a;
+	printf("1 => b:%d\n", b);
+	*/
+
+
+
+	/*
+	int num1, num2, num_max;
+	printf("정수입력 : ");
+	scanf_s("%d", &num1);
+	printf("정수입력 : ");
+	scanf_s("%d", &num2);
+	num_max = num1 > num2 ? num1 : num2;
+	printf("큰수는 %d\n입니다", num_max);
+	*/
+
+
+	/*
+	int cup;
+	printf("컵의 사이즈를 입력하시오 : ");
+	scanf_s("%d", &cup);
+
+	if (cup > 200)
+		printf("Large");
+	else if (cup > 100)
+		printf("Medium");
+	else
+		printf("Small");
+	*/
+	
+
+	/*printf("정수입력 : ");
+	scanf_s("%d", &num);
+	if (num < 10)
+		printf("small");
+	else
+		printf("big");*/
+
+
+	/*printf("정수1입력 : ");
+	scanf_s("%d", &num1);
+
+	printf("정수2입력 : ");
+	scanf_s("%d", &num2);
+	num_max = (num1 > num2 ? num1 : num2) - (num1 < num2 ? num1 : num2);
+	printf("%d-%d=%d",num1 > num2 ? num1 : num2 , num1 < num2 ? num1 : num2 , num_max);*/
+
+
+	/*printf("정수입력 : ");
+	scanf_s("%d", &num);
+	num = num % 7;
+
+	switch (num)
+		{
+			case 0 : printf("7의배수 입니다"); break;
+			default :printf("7의배수가 아닙니다");
+		}*/
+
+	/*int num, num1, num2, num_max;
+
+	printf("정수입력 : ");
+	scanf_s("%d", &num);
+
+	if (num > 50 && num < 60)
+		printf("win");
+	else
+		printf("lose");*/
+
+
+	
+	//int hap = 0;
+	//int i;
+
+	///*for (i = 502; i <= 1000; i += 2)
+	//{
+	//	hap = hap + i;
+	//}*/
+
+	//for (i = 502; i <= 1000; i += 2)
+	//{
+	//	if(i%2==0)
+	//	hap = hap + i;
+	//}
+
+	//printf("501~ 1000사이의 짝수 합 : %d", hap);
+
+	/*for (int i =1; i<=9; i++)
+	{
+		for (int k = 2; k <= 9; k++)
+			printf("%2d *%2d =%2d ", k, i, k * i);
+		printf("\n");
+	}*/
+	
+	/*int number, sum = 0;
+	do{
+		printf("정수를 입력하세요 : ");
+		scanf_s("%d", &number);
+		sum += number;
+	} while (number != -1);
+
+	printf("숫자들의 합 : %d", sum+1);*/
+
+	/*int num = 0;
+	printf("정수를 입력하세요 : ");
+	scanf_s("%d", &num);
+	for (int i = 1; i <= num; i++)
+		printf("%d\n", i);*/
+
+	/*int a = 2, b = 10, sum=0;
+
+	for (int i = a; i <= b; i++)
+	{
+		if (i % 3 == 0)
+		{
+			sum += i;
+			printf("%d\n", i);
+		}
+	}
+	printf("3배수의 합 : %d", sum);*/
+
+	int num,sum=0;
+	printf("정수를 입력하세요 : ");
+	scanf_s("%d", &num);
+	for (int i = 1; i <= num; i++)
+	{
+		printf("%d\n", i);
+		sum += i;
+		printf("합은 %d\n", sum);
+		if (sum > num) break;
+		
+	}
+
+	return 0;
+}
+
+
+============================================================================================================
+#include <stdio.h>
+
+int main()
+{
+	/*
+	int n = 123;
+	float pi = 3.141592;
+	printf("%-5d\n", n);
+	printf("%7.2f\n", pi);
+	*/
+
+
+
+	//삼항연산자 > ? :
+
+
+
+	/*
+	int a, b;
+	a = 1;
+	b = a++;
+	printf("1 => b:%d\n", b);
+	a = 1;
+	b = ++a;
+	printf("1 => b:%d\n", b);
+	*/
+
+
+
+	/*
+	int num1, num2, num_max;
+	printf("정수입력 : ");
+	scanf_s("%d", &num1);
+	printf("정수입력 : ");
+	scanf_s("%d", &num2);
+	num_max = num1 > num2 ? num1 : num2;
+	printf("큰수는 %d\n입니다", num_max);
+	*/
+
+
+	/*
+	int cup;
+	printf("컵의 사이즈를 입력하시오 : ");
+	scanf_s("%d", &cup);
+
+	if (cup > 200)
+		printf("Large");
+	else if (cup > 100)
+		printf("Medium");
+	else
+		printf("Small");
+	*/
+	
+
+	/*printf("정수입력 : ");
+	scanf_s("%d", &num);
+	if (num < 10)
+		printf("small");
+	else
+		printf("big");*/
+
+
+	/*printf("정수1입력 : ");
+	scanf_s("%d", &num1);
+
+	printf("정수2입력 : ");
+	scanf_s("%d", &num2);
+	num_max = (num1 > num2 ? num1 : num2) - (num1 < num2 ? num1 : num2);
+	printf("%d-%d=%d",num1 > num2 ? num1 : num2 , num1 < num2 ? num1 : num2 , num_max);*/
+
+
+	/*printf("정수입력 : ");
+	scanf_s("%d", &num);
+	num = num % 7;
+
+	switch (num)
+		{
+			case 0 : printf("7의배수 입니다"); break;
+			default :printf("7의배수가 아닙니다");
+		}*/
+
+	/*int num, num1, num2, num_max;
+
+	printf("정수입력 : ");
+	scanf_s("%d", &num);
+
+	if (num > 50 && num < 60)
+		printf("win");
+	else
+		printf("lose");*/
+
+
+	
+	//int hap = 0;
+	//int i;
+
+	///*for (i = 502; i <= 1000; i += 2)
+	//{
+	//	hap = hap + i;
+	//}*/
+
+	//for (i = 502; i <= 1000; i += 2)
+	//{
+	//	if(i%2==0)
+	//	hap = hap + i;
+	//}
+
+	//printf("501~ 1000사이의 짝수 합 : %d", hap);
+
+	/*for (int i =1; i<=9; i++)
+	{
+		for (int k = 2; k <= 9; k++)
+			printf("%2d *%2d =%2d ", k, i, k * i);
+		printf("\n");
+	}*/
+	
+	/*int number, sum = 0;
+	do{
+		printf("정수를 입력하세요 : ");
+		scanf_s("%d", &number);
+		sum += number;
+	} while (number != -1);
+
+	printf("숫자들의 합 : %d", sum+1);*/
+
+	/*int num = 0;
+	printf("정수를 입력하세요 : ");
+	scanf_s("%d", &num);
+	for (int i = 1; i <= num; i++)
+		printf("%d\n", i);*/
+
+	/*int a = 2, b = 10, sum=0;
+
+	for (int i = a; i <= b; i++)
+	{
+		if (i % 3 == 0)
+		{
+			sum += i;
+			printf("%d\n", i);
+		}
+	}
+	printf("3배수의 합 : %d", sum);*/
+
+	int num,sum=0;
+	printf("정수를 입력하세요 : ");
+	scanf_s("%d", &num);
+	for (int i = 1; i <= num; i++)
+	{
+		printf("%d\n", i);
+		sum += i;
+		printf("합은 %d\n", sum);
+		if (sum > num) break;
+		
+	}
+
+	return 0;
+}

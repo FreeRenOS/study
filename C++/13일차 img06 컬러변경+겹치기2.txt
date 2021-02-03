@@ -1,0 +1,67 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	Mat img_src, img_dst;
+
+	//절대경로
+	//string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\pawns.jpg";
+	string filename = "images/pawns.jpg"; //루트 경로
+
+	img_src = imread(filename, IMREAD_COLOR);
+
+
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+	for (int i = 0; i < 1; i++)
+		pyrDown(img_src, img_src); //이미지 사이즈 1/2로 줄임
+
+	int width = img_src.cols;
+	int height = img_src.rows;
+
+	//관심영역 ROI(Region of Interest)
+	//set ROI(X,Y,W,H)
+	int x=30, y=100, w=200, h=400;
+	Rect rect(x, y, w, h);
+	img_dst = img_src(rect);
+
+
+	//cvtColor(img_src, img_dst, COLOR_BGR2GRAY);//그레이로 만듬
+	//Mat tmp[] = { img_dst, img_dst, img_dst }; // B G R 그레이(128)로 만듬
+	
+	cvtColor(img_src, img_src, COLOR_BGR2GRAY);//그레이로 만듬
+
+
+	//Mat zeroMat = Mat::zeros(img_dst.size(), CV_8UC1);
+	//Mat onesMat = Mat::ones(img_dst.size(), CV_8UC1);
+	//onesMat = onesMat * 255;
+
+	//Mat tmp[] = { zeroMat, zeroMat, zeroMat }; // 검은색으로 만듬
+	//Mat tmp[] = { zeroMat, zeroMat, onesMat }; // 빨간색으로 만듬
+	//Mat tmp[] = { onesMat, onesMat, onesMat }; // 흰색으로 만듬
+
+	Mat tmp[] = { img_src, img_src, img_src };
+
+	merge(tmp, 3, img_src);
+	img_dst.copyTo(img_src(rect));
+
+	namedWindow("Color");
+
+	imshow("Color", img_src);
+	imshow("dst", img_dst);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

@@ -1,0 +1,39 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	// 이미지판 만들기
+	int width = 640;
+	int height = 480;
+	Mat img(height, width, CV_8UC3,Scalar(0,0,0));  
+	// CV_8UC3 : 2에 8승 8비트= 255 , unc 정수, 3채널
+
+
+	////이미지 정보확인
+	//int img_h = img.rows;
+	//int img_w = img.cols;
+	//int img_bpp = img.channels();
+	//cout << img_h << " " << img_w << " " << img_bpp << endl;
+
+	int radius = 10;
+	
+	circle(img, Point(100, 300), radius, Scalar(0, 255, 255), -1);
+		// img : 원을 그릴 이미지
+		// center : 원의 중심좌표
+		// radius : 원의 반지름
+		// color : 원의 색깔
+		// thickness : 선의 굵기 -1 : 내부를 채움
+
+	imshow("result", img);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

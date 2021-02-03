@@ -1,0 +1,67 @@
+9-3
+계산기 기능의 Calculator 클래스를 정의해보자
+
+기본적인 기능은 덧셈, 뺄셈, 곱셈, 그리고 나눗셈이며 연산을 할 때마다 어떤 연산을 몇 번 수행하였는지 기록되어야 한다.
+
+멤버변수는 privat로 멤버함수는 public으로 선언하자
+
+int main()
+{
+    Calculator cal;
+    cal.init();
+    cout << "3.2 + 2.4 = " << cal.Add(3.2, 2.4) << endl;
+    cout << "2.2 - 1.5 = " << cal.Min(2.2, 0.5) << endl;
+    cout << "3.0 * 2.5 = " << cal.Mul(3.0, 2.5) << endl;
+    cout << "3.5 / 1.7 = " << cal.Div(3.5, 1.7) << endl;
+    cout << "4.9 / 1.2 = " << cal.Div(4.9, 1.2) << endl;
+    cal.ShowOpCount();
+    return 0;
+}
+
+//3.2 + 2.4 = 5.6
+//2.2 - 1.5 = 0.7
+//3.0 * 2.5 = 7.5
+//3.5/1.7 = 2.05882
+//4.9/1.2=4.08333
+//덧셈:1 뺄셈:1 곱셈:1 나눗셈:2
+
+
+
+9-5
+명함클래스(NameCard)를 정의해 보자 이 클래스에는 다음의 정보가 저장되어야 한다.
+- 성명
+- 회사이름
+- 전화번호
+- 직급
+
+직급정보를 제외한 나머지는 문자열로 저장하라
+직급정보는 int형 멤버변수를 선언해서 저장하되 enum선언을 활용해보자
+enum{CLERK, SENIOR, ASSIST, MANAGER}; // 사원 주임 대리 과장
+
+다음 메인 함수를 참조하여 NameCard 클래스를 작성해보자
+
+int main()
+{
+   NameCard manClerk("Lee", "ABCorp", "010-1111-2222", COM_POS::CLERK);
+   NameCard manSENIOR("Hong", "OrangeEng", "010-3333-4444", COM_POS::SENIOR);
+   NameCard manAssist("Kim", "GoodCom", "010-5555-6666", COM_POS::ASSIST);
+   manClerk.ShowNameCardInfo();
+   manSENIOR.ShowNameCardInfo();
+   manAssist.ShowNameCardInfo();
+   return 0;
+}
+
+이름 : Lee
+회사 : ABCorp
+전화번호 : 010-1111-2222
+직급 : 사원
+
+이름 : Hong
+회사 : OrangeEng
+전화번호 : 010-3333-4444
+직급 : 과장
+
+이름 : Kim
+회사 : GoodCom
+전화번호 : 010-5555-6666
+직급 : 대리

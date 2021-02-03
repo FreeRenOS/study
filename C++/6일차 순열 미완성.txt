@@ -1,0 +1,196 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+
+using namespace std;
+
+struct string_with_perm
+{
+	string str;
+	int perm;
+};
+
+vector<string> split(const string& s);
+string::size_type width(const vector <string>& v);
+vector<string> frame(const vector<string>& v);
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom);
+vector<string> hcat(const vector<string>& left, const vector<string>& right);
+vector<string_with_perm> rotation(const vector<string>& splitted);
+vector<string_with_perm> rerotation(const vector<string>& splitted);
+bool compare(const string_with_perm& x, const string_with_perm& y);
+
+
+int main()
+{
+	string s;
+	getline(cin, s);
+	cout << endl << "output : " << endl;
+	//vector <string> p = split(s);
+	vector<string_with_perm> p = rotation(split(s));
+
+	for (vector<string_with_perm>::size_type i = 0; i != p.size(); i++) {
+		cout << p[i].str << endl;
+	}
+	cout << "정렬" << endl;
+	sort(p.begin(), p.end(), compare);
+	for (vector<string_with_perm>::size_type i = 0; i != p.size(); i++) {
+		cout << p[i].str <<"구분:" <<p[i].perm << endl;
+	}
+	
+
+
+
+
+	return 0;
+}
+
+vector<string> split(const string& s)
+{
+	vector<string> ret;
+	typedef string::size_type string_size;
+	string_size i = 0;
+	while (i != s.size()) {
+		while (i != s.size() && isspace(s[i])) {
+			//isspace 공백아닌 문자를 만날때까지 i 증가
+			i++;
+		}
+
+		string_size j = i; // 공백이 아닌 첫글자 위치j에 저장
+		while (j != s.size() && !isspace(s[j])) {
+			// !isspace 공백을 만날때까지 j 증가
+			j++;
+		}
+
+		if (i != j) {
+			//i에서 부터 j-i 개의 문자들을 s에 복사
+			ret.push_back(s.substr(i, j - i));
+			i = j;
+		}
+
+
+	}
+
+	return ret;
+}
+
+
+string::size_type width(const vector <string>& v)
+{
+	string::size_type maxlen = 0;
+	for (vector<string>::size_type i = 0; i != v.size(); i++)
+	{
+		maxlen = maxlen > v[i].size() ? maxlen : v[i].size();
+		//maxlen = max(maxlen, v[i].size());
+	}
+
+	return maxlen;
+}
+
+vector<string> frame(const vector<string>& v)
+{
+	vector<string> ret;
+	string::size_type maxlen = width(v);
+	string border(maxlen + 4, '*');
+	ret.push_back(border);
+
+	for (vector<string>::size_type i = 0; i != v.size(); i++)
+	{
+		ret.push_back("* " + v[i] + string(maxlen - v[i].size(), ' ') + " *");
+	}
+
+	ret.push_back(border);
+
+	return ret;
+}
+
+vector<string> vcat(const vector<string>& top, const vector<string>& bottom)
+{
+	vector<string> ret = top;
+
+	for (vector<string>::const_iterator it = bottom.begin(); it != bottom.end(); it++)
+	{
+		ret.push_back(*it);
+	}
+	return ret;
+}
+
+vector<string> hcat(const vector<string>& left, const vector<string>& right)
+{
+	vector<string> ret;
+	//두 문자 그림사이에 공백 하나를 남김
+	string::size_type width1 = width(left) + 1;
+
+	//왼쪽과 오른쪽 요소를 살피는 인덱스
+	vector<string>::size_type i = 0, j = 0;
+
+	//모든행 살핌
+	while (i != left.size() || j != right.size()) {
+		string s;
+		//왼쪽문자 행 복사해서 넣기
+		if (i != left.size())
+			s = left[i++];
+		//공백 추가
+		s += string(width1 - s.size(), ' ');
+
+		//오른쪽 문자 행 복사해서 추가
+		if (j != right.size())
+			s += right[j++];
+
+		//새로운 문자에 문자열 넣기
+		ret.push_back(s);
+	}
+
+	return ret;
+}
+
+vector<string_with_perm> rotation(const vector<string>& splitted) {
+	vector<string_with_perm> result;
+	for (vector<string>::size_type i = 0; i != splitted.size(); ++i) {
+		string oneLine;
+		vector<string> temp(splitted);
+
+		temp.insert(temp.end(), temp.begin(), temp.begin()+i);
+		temp.erase(temp.begin(),temp.begin()+i);
+		for (vector<string>::size_type j = 0; j != temp.size(); ++j) {
+			oneLine += " ";
+			oneLine += temp[j];
+		}
+		string_with_perm sp;
+		sp.str = oneLine;
+		sp.perm = i;
+		result.push_back(sp);
+
+	}
+	sort(result.begin(), result.end(), compare);
+
+	return result;
+}
+vector<string_with_perm> rerotation(const vector<string>& splitted) {
+	vector<string_with_perm> result;
+	for (vector<string>::size_type i = 0; i != splitted.size(); ++i) {
+		string oneLine;
+		vector<string> temp(splitted);
+
+		temp.insert(temp.end(), temp.begin(), temp.begin() + i);
+		temp.erase(temp.begin(), temp.begin() + i);
+		for (vector<string>::size_type j = 0; j != temp.size(); ++j) {
+			oneLine += " ";
+			oneLine += temp[j];
+		}
+		string_with_perm sp;
+		sp.str = oneLine;
+		sp.perm = i;
+		result.push_back(sp);
+	}
+	return result;
+}
+
+
+
+
+bool compare(const string_with_perm& x, const string_with_perm& y)
+{
+	return x.str < y.str;
+}

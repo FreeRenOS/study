@@ -1,0 +1,403 @@
+#include <stdio.h>
+
+int get_line_parameter(int x1, int y1, int x2, int y2, float* slope, float* yintercept)
+{//기울기와 절편을 인수로 전달
+	if (x1 == x2)
+		return -1;
+	else {
+		*slope = (float)(y2 - y1) / (float)(x2 - x1);
+		*yintercept = y1 - (*slope) * x1;
+		return 0;
+	}
+}
+double get_array_avg(int values[], int n)
+{
+	double avg=0;
+	for (int i = 0; i < n; i++)
+		avg += *(values + i);
+
+	avg = avg / n;
+	
+	return avg;
+}
+void printf_array(int values[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		printf("%3d", *(values + i));
+	}
+	printf("\n");
+}
+void swap(int *a, int *b)
+{
+	int tmp;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+
+int main()
+{
+	/*
+	char* pc;
+	int* pi;
+	double* pd;
+
+	pc = (char*)10000;
+	pi = (int*)10000;
+	pd = (double*)10000;
+	printf("증가전 pc = %d, pi = %d, pd = %d\n", pc, pi, pd);
+
+	pc++;
+	pi++;
+	pd++;
+	printf("증가후 pc = %p, pi = %p, pd = %p\n", pc, pi, pd);
+	printf("pc+2 = %p, pi+2 = %p, pd+2 = %p\n", pc+2, pi+2, pd+2);
+	*/
+
+
+	/*int aa[] = { 10,20,30,40,50 };
+	int* ptr = aa;
+	
+	printf("%d\n", ++(* ptr));
+
+	printf("%d\n", (*ptr)++);*/
+
+	/*int aa[] = { 10,20,30,40,50 };
+	int i, * ptr, * ptr2, * ptr3;
+	ptr = ptr2 = ptr3 = aa;
+
+	for (i = 0; i < 5; i++)
+	{
+		printf("%d ", *ptr++);
+		printf("%d ", *++ptr2);
+		printf("%d ", ++*ptr3);
+		printf("\n");
+	}*/
+
+
+	/*
+	int data = 0x0A0B0C0D;
+	char* pc;
+	pc = (char*)&data;
+
+	for (int i = 0; i < 4; i++)
+	{
+		printf("*(pc + %d) = %02X \n", i, *(pc + i)); //리틀앤디아로 나온다
+	}
+	*/
+
+	/*
+	float s, y;
+	if (get_line_parameter(3, 3, 6, 6, &s, &y) == -1)
+		printf("에러\n");
+	else
+		printf("기울기는 %f, y절편은 %f\n", s, y);
+	*/
+
+	/*
+	int a[] = { 10,20,30,40,50 };
+	double result;
+	printf_array(a,5);
+	result = get_array_avg(a,5);
+	printf("배열 원소들의 평균 = %f\n", result);
+	*/
+	/*char ch[100];
+	char* p;
+	int count;
+	printf("문자열을 입력하세요 : ");
+	gets_s(ch,sizeof(ch));
+	
+	count = strlen(ch);
+	p = ch;
+	for (int i = 0; i < count; i++)
+	{
+		printf("%c", *(p + count - (i + 1)));
+	}
+	printf("\n%s\n", ch);*/
+	
+	/*int a, b,tmp;
+	int *p1, *p2;
+	printf("a 값 입력 : ");
+	scanf_s("%d", &a);
+	p1 = &a;
+	printf("b 값 입력 : ");
+	scanf_s("%d", &b);
+	p2 = &b;
+
+	tmp = *p1;
+	*p1 = *p2;
+	*p2 = tmp;
+
+	printf("바뀐 값 a는 %d, b는 %d", a, b);*/
+
+	
+	/*int n[3] = {0}, tmp;
+	int* p;
+	p = n;
+	printf("서로 다른 세 정수를 입력하시오 (ex; 30 50 20 엔터) : ");
+
+	scanf_s("%d %d %d", &n[0], &n[1], &n[2]);
+
+	if (*p >= *(p+1))
+	{
+		tmp = *p;
+		*p = *(p+1);
+		*(p+1) = tmp;
+	}
+	if(*(p+1) >= *(p+2))
+	{
+		tmp = *(p+1);
+		*(p + 1) = *(p+2);
+		*(p + 2) = tmp;
+	}
+	if (*p >= *(p + 1))
+	{
+		tmp = *p;
+		*p = *(p + 1);
+		*(p + 1) = tmp;
+	}
+
+	printf("%d %d %d 값의 중간값 = %d", *p, *(p + 1), *(p + 2), *(p + 1));*/
+	
+
+	/*int s[10] = {1,5,6,7,2,4,6,7,8,3};
+	int* p;
+	p = s;
+	int i, k;
+	printf("정렬 전 배열 =>");
+	for (int i = 0; i < 10; i++) 
+	{
+		printf("%d", *(p+i));
+	}
+
+	printf("\n");
+
+	for (i = 0; i < 9; i++) 
+	{
+		for (k=i+1; k< 10; k++)
+		{
+			if (*(p + i) > * (p+k))
+			{
+				swap(p + i, p + k);
+			}
+		}
+	}
+	printf("정렬 후 배열 =>");
+	for (int i = 0; i < 10; i++) 
+	{
+		printf("%d", s[i]);
+	}*/
+
+	char bb[5][20]={""};
+
+	for (int i = 0; i < 5; i++) 
+	{
+		printf("%d 단어를 입력하세요 : ",i+1);
+		scanf_s("%s", bb[i], sizeof(bb));
+	}
+
+	for (int i = 0; i < 5; i++)
+		printf("%s\n", bb[i]);
+
+
+
+
+
+
+
+
+
+
+
+	//구구단 출력에서 제외할 구구단 수를 받아서 제외하고 출력(중간에 없는값 받아도 상관없이 1단 10단 받아도 넘어감)
+
+	return 0;
+
+}
+
+
+
+
+
+	/*
+	//구구단 출력에서 제외할 구구단 수를 받아서 제외하고 출력(중간에 없는값 받아도 상관없이 1단 10단 받아도 넘어감)
+
+	char name[100];
+	int aaa[8];
+	int k=0, num, dan,z, ckeck;
+	char* delimeter = " ";
+	char* token, * context=NULL;
+
+	printf("구구단에서 제외할 단을 입력하시오 : ");
+
+	fgets(name, 100, stdin);
+
+	//printf("%s", name);
+
+	token = strtok_s(name, delimeter, &context);
+
+	while (token != NULL)
+	{
+		aaa[k] = atoi(token); //문자를 숫자로 바꿈
+		//printf("%s %d\n", token, aaa[k]);
+		if (aaa[k] >= 2 && aaa[k] <= 9)
+			k++;
+		token = strtok_s(NULL, delimeter, &context);
+	}
+
+	for (num = 1; num <= 9; num++){
+		for (dan = 2; dan <= 9; dan++) {
+			ckeck = 1;
+			for (z = 0; z < k; z++)
+				if(dan==aaa[z])
+				ckeck = 0;
+
+			if (ckeck == 1)
+				printf(" %2d*%2d =%2d", dan, num, dan * num);
+
+		}
+		printf("\n");
+	}
+	*/
+
+
+	//int i;
+	//double d = 3.14f;
+
+	//int* pi;
+	//double* pd;
+	//void* pv;
+
+	//pi = &i;
+	//pd = &d;
+	//pi = &d; //에러발생
+	//pv = &i;
+	//pv = &d;
+
+	//printf("실수값 d : %f\n", *(double*)pv);
+
+
+
+	//char* animal[3];
+	//char** ppanimal;
+
+	//animal[0] = "사자";
+	//animal[1] = "호랑이";
+	//animal[2] = "거북이";
+
+	//ppanimal = animal;
+
+	//print(animal);
+
+
+	int (*myfunc[2])(const char*);
+	
+	myfunc[0] = puts;
+	myfunc[1] = strlen;
+	print_1(myfunc[0]);
+	print_2(myfunc);
+
+
+	//puts("hello pointer");
+	//myfunc[0]("hello pointer");
+
+	//printf("문자열 의 길이 : %d\n", strlen("hello"));
+	//printf("문자열 의 길이 : %d\n", myfunc[1]("hello"));
+	//printf("문자열 의 길이 : %d\n", myfunc[2]("hello"));
+
+	return 0;
+
+}
+
+void print(char** ppanimal) {
+
+	puts(ppanimal[0]);
+	puts(ppanimal[1]);
+	puts(ppanimal[2]);
+}
+
+void print_1(int (*X)(const char*)){
+
+	X("hello pointer");
+}
+void print_2(int (*X[2])(const char*)) {
+
+	X[0]("hello pointer");
+	printf("문자열 의 길이 : %d\n", X[1]("hello"));
+}
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+
+int main(int argc, int* argv[])
+{
+	int i;
+	printf("인수의 수 : %d\n", argc);
+	for (i = 0; i < argc; i++)
+	{
+		printf("argv[%d]:%s\n", i, argv[i]);
+	}
+
+	return 0;
+
+}
+
+
+C:\Users\w>cd C:\Users\w\source\repos\CProject3\Debug
+
+C:\Users\w\source\repos\CProject3\Debug>CProject3 hello hi 0 1 9
+인수의 수 : 6
+argv[0]:CProject3
+argv[1]:hello
+argv[2]:hi
+argv[3]:0
+argv[4]:1
+argv[5]:9
+
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define SIZE 5
+
+int main()
+{
+	char str[5][20];
+	int i, j;
+	char temp[20];
+
+	for (i = 0; i < SIZE; i++)
+	{
+		printf("단어를 입력하세요 :");
+		scanf_s("%s", str[i], sizeof(str)/sizeof(str[0]));
+	}
+
+	for (i = 0; i < SIZE; i++)
+		printf("%s\n", str[i]);
+
+	for (i = 0; i < 4; i++)
+		for (j = i; j < 5; j++)
+			if (strcmp(str[j], str[i]) < 0)
+			{
+				strcpy_s(temp, 20, str[i]);
+				strcpy_s(str[i], 20, str[j]);
+				strcpy_s(str[j], 20, temp);
+			}
+
+
+	printf("정렬후\n");
+	for (i = 0; i < SIZE; i++)
+		printf("%s\n", str[i]);
+
+	return 0;
+}
+
+
+

@@ -1,0 +1,264 @@
+#include <vector>
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <iomanip>
+#include<ios>
+#include<algorithm>
+
+
+using namespace std;
+
+int main()
+{
+
+	/*cout << "Please enter first name : ";
+	string name;
+	cin >> name;
+
+	string greeting = "Hello ," + name + "!";
+
+	string spaces(greeting.size(), ' ');
+	string second = "* " + spaces + " *";
+	string first(second.size(), '*');
+	greeting = "* " + greeting + " *";
+	cout << first << endl;
+	cout << second <<endl;
+	cout << greeting << endl;//미완성 */
+
+
+	/*string name;
+	cout << "이름을 입력하세요 : ";
+	cin >> name;
+
+
+	const string greeting = "Hello " + name + "!";
+	const string spaces(greeting.size(), ' ');
+	const string blanks = "* " + spaces + " *";
+	const string stars(blanks.size(), '*');
+
+
+	cout << endl;
+	cout << stars << endl;
+	cout << blanks << endl;
+	cout << "* " + greeting + " *" << endl;
+	cout << blanks << endl;
+	cout << stars << endl;*/
+
+
+
+	/*
+	string name;
+	cout << "이름을 입력하세요 : ";
+	cin >> name;
+
+	const string greeting = "Hello " + name + "!";
+	const int pad = 1; // 인사말을 둘러싼 공백의 줄수
+	const int rows = 2 * pad + 3;
+	const string::size_type cols = greeting.size() + pad * 2 + 2;
+
+	cout << endl;
+	for (int r = 0; r < rows; r++){
+		string::size_type c = 0;
+		while (c < cols){
+			if (r == pad + 1 && c == pad + 1) {
+			cout << greeting;
+			c+= greeting.size();
+			}
+			else {
+				if (r == 0 || r == rows - 1 || c == 0 || c == cols - 1)
+					cout << "*";
+				else
+					cout << " ";
+				c++;
+			}
+
+		}
+		cout << endl;
+
+	}
+	*/
+
+
+	//실행 시간 체크
+
+	//chrono::system_clock::time_point start = chrono::system_clock::now();
+	//
+	////cout << "Hello" << endl;//344us
+	////cout << "Hello" << '\n';//561us
+	//cout << "Hello\n" ;//154us
+
+	//chrono::duration<double>sec = chrono::system_clock::now() - start;
+	//
+	//chrono::microseconds mic = chrono::duration_cast<chrono::microseconds>(sec);
+
+	//cout << sec.count() <<"s"<< endl;
+	//cout << mic.count() <<"us"<< endl;
+
+
+
+
+	////vector <자료형> [변수이름]
+	//vector <int> v1(5,3); // 초기 0값
+	//for (int x : v1) cout << x << ",";
+	//cout << endl;
+	//
+	//vector <char> v2(10,'a');// 초기 ' '값
+	//for (char x : v2) cout << x << ",";
+	//cout << endl;
+	//
+	//vector<char>v3{ 'a','b','c' };
+	//for (char x : v3) cout << x << ",";
+	//cout << endl;
+	//
+	//vector<int> v4 = { 1,2,3,4 };
+	//for (int x : v4) cout << x << ",";
+	//cout << endl;
+
+	//vector <string> v5;
+	//v5.push_back("aa");
+	//v5.push_back("bb");
+	//v5.push_back("cc");
+	//for (string x : v5) cout << x << ",";
+	//cout << endl;
+
+//vector<double> qq;
+	//cout << "정수를 입력하세요(마지막에 eof입력) : ";
+	//double x;
+	//while (cin >> x) {
+	//	qq.push_back(x);
+	//}
+
+
+	//typedef vector<double>::size_type vec_sz;
+	//vec_sz size = qq.size();
+
+	//if (size == 0) {
+	//cout << endl << "입력받은 값이 없습니다. 종료합니다!" << endl;
+	//return 1;
+	//}
+	//
+	//sort(qq.begin(), qq.end());
+
+	//vec_sz mid = size / 2;
+	//double q2 = size % 2 == 0 ? (qq[mid] + qq[mid - 1]) / 2 : qq[mid];
+	//cout << mid << endl;
+	//cout << "중간값 :"<< q2 << endl;
+
+	//vec_sz mid1 = mid / 2;
+	//double q1 = mid % 2 == 0 ? (qq[mid1] + qq[mid1 - 1]) / 2 : qq[mid1];
+	//cout << mid1 << endl;
+	//cout << "제 1사분위수 :" << q1 << endl;
+
+	//vec_sz mid3 = mid+mid1;
+	//double q3 = mid+mid1 % 2 == 0 ? (qq[mid+mid1] + qq[(mid+mid1) - 1]) / 2 : qq[mid+mid1];
+	//cout << mid3 << endl;
+	//cout << "제 3사분위수 :" << q3 << endl;
+	//
+
+
+
+
+#include <vector>
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <iomanip>
+#include<ios>
+#include<algorithm>
+
+
+using namespace std;
+
+double grade(double midterm, double final, double homework);
+double grade(double midterm, double finalterm, const vector<double>& hw);
+double median(vector<double>vec);
+
+
+
+int main()
+{
+
+	
+
+	cout << "이름을 입력하세요 : ";
+	string name;
+	cin >> name;
+	cout << "Hello "<< name <<"!"<< endl;
+
+	cout << "중간, 기말점수를 입력 (80.0 90.0) : ";
+	double midterm, finalterm;
+	cin >> midterm >> finalterm;
+	cout << "과제 점수 입력,"
+		"마지막에 EOF(end-of-file) 입력 : ";
+
+	vector<double> homework;
+	
+
+	double x;
+	while (cin >> x) {
+		homework.push_back(x);
+	}
+
+	vector<double>& hw = homework;
+
+	//정렬
+
+	// 중간값구하기
+
+	//grade(midterm, finalterm, homework);
+
+
+	//grade(midterm, finalterm, hw);
+	double aa = grade(midterm, finalterm, hw);
+	streamsize prec = cout.precision(); //기존값 저장
+	//결과 출력
+	double result =aa;
+	cout << result << endl; //기본값 총자리수 6자리
+	//cout << "당신의 최종 점수는 " << endl
+	//	<< fixed << setprecision(2) << result << endl
+	//	<< fixed << setprecision(10) << result << setprecision(prec) << endl;
+	////fixed 소수점 아래 자리를 고정한다(4자리), fixed 없으면 총자리수(정수+소수) 4자리 
+	//cout.unsetf(ios::fixed);// 소수점 고정 해제
+	//cout << result;
+
+	
+
+	return 0;
+
+}
+
+
+
+
+double grade(double midterm, double finalterm, double homework) {
+	return 0.2 * midterm + 0.4 * finalterm + 0.4 * homework;
+}
+double grade(double midterm, double finalterm, const vector<double>&hw) {
+	if (hw.size() == 0)
+		throw domain_error("과제 데이터가 없습니다.");
+
+	return grade(midterm, finalterm, median(hw));
+}
+
+double median(vector<double>vec) {
+	//1. 점수의 존재 유무 확인
+	typedef vector<double>::size_type vec_sz;
+	vec_sz size = vec.size();
+	if (size == 0) {
+		cout << endl << "입력한 과제 점수가 없습니다. 종료합니다.!" << endl;
+		//return 1;
+	}
+
+	//2.정렬 sort <algorithm>
+	sort(vec.begin(), vec.end());
+
+	//과제점수의 가운데값 median 구함
+	vec_sz min = size / 2;
+	double median;
+	median = size % 2 == 0 ? (vec[min] + vec[min - 1]) / 2 : vec[min];
+	return median;
+}
+
+
+

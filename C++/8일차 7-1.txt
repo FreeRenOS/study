@@ -1,0 +1,131 @@
+#include<iostream>
+#include <map>
+#include<string>
+#include<vector>
+
+
+using namespace std;
+vector<string> split(const string& s);
+map<string, vector<int> > xref(istream& in, vector<string> find_words(const string&) = split );
+
+
+
+int main() {
+
+
+	////map<int, int> m;
+	//map<string, int> m;
+
+	//m.begin(); //반복자 시작
+	//m.end(); //반복자 끝
+	//m.insert(make_pair("a", 1));
+	//m["b"] = 2;
+	//m.insert(make_pair("c", 3));
+	//m.insert(make_pair("d", 4));
+	//m.insert(make_pair("e", 5));
+
+
+	////erase(key)
+	//m.erase("a");
+	//m.erase(m.find("b"));
+
+	////find(key)
+	//cout << " c : " << m.find("c")->second << endl;
+	//cout << " c : " << m.count("c") << endl;
+
+	////map<string, int>::const_iterator it 
+	//for (auto it = m.begin(); it != m.end(); it++) {
+	//	cout << "key : " << it->first <<
+	//		" value : " << it->second << endl;
+	//}
+
+
+
+	//string s;
+	//map<string, int> counters;
+	//cout << "문장을 입력하교 종료시 Ctrl+Z 눌러주세요" << endl;
+	//while (cin >> s)
+	//	counters[s]++;
+
+	////단어와 관련 카운트 쓰기
+	//
+	//for (auto it = counters.begin(); it != counters.end(); it++) {
+	//	cout << it->first << "\t" << it->second << endl;
+	//}
+
+
+	map<string, vector<int> > ret = xref(cin);
+	//map<string, vector<int> >::const_iterator it
+	for (auto it = ret.begin(); it != ret.end(); it++) {
+
+		cout << it->first << " occurs on line(s) ";
+
+
+		vector<int>::const_iterator line_it = it->second.begin();
+		cout << *line_it;
+		line_it++;
+
+		while (line_it != it->second.end()) {
+			cout << ", " << *line_it;
+			line_it++;
+		}
+		cout << endl;
+	}
+
+
+	return 0;
+}
+
+//map<string, vector<int> > xref(istream& in, vector<string> find_words(const string&) = split ) 선언할때 split 정의한번만 해주면됨
+map<string, vector<int> > xref(istream& in, vector<string> find_words(const string&) )
+{
+	string line;
+	int line_number = 0;
+	map<string, vector<int> > ret;
+
+		//다음 행을 읽음
+
+		while (getline(in, line)) {
+			line_number++;
+		
+			//입력한 행을 단어로 나눔
+			vector<string> words = find_words(line);
+
+			//현재 행에 등장한 모든 단어를 저장
+			for (vector<string>::const_iterator it = words.begin(); it != words.end(); it++)
+				ret[*it].push_back(line_number); //백터에 저장하기때문에 push_back씀
+
+		
+		}
+	return ret;
+}
+
+
+vector<string> split(const string& s)
+{
+	vector<string> ret;
+	typedef string::size_type string_size;
+	string_size i = 0;
+	while (i != s.size()) {
+		while (i != s.size() && isspace(s[i])) {
+			//isspace 공백아닌 문자를 만날때까지 i 증가
+			i++;
+		}
+
+		string_size j = i; // 공백이 아닌 첫글자 위치j에 저장
+		while (j != s.size() && !isspace(s[j])) {
+			// !isspace 공백을 만날때까지 j 증가
+			j++;
+		}
+
+		if (i != j) {
+			//i에서 부터 j-i 개의 문자들을 s에 복사
+			ret.push_back(s.substr(i, j - i));
+			i = j;
+		}
+
+
+	}
+
+	return ret;
+}

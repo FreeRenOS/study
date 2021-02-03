@@ -1,0 +1,40 @@
+#include <iostream>
+
+using namespace std;
+
+class SimpleClass {
+private:
+	int num;
+public:
+	SimpleClass(int n) :num(n) 
+	{
+		cout << "num = " << num << ", ";
+		cout << "adress = " << this << endl;
+	
+	}
+	void getNum() {
+
+		cout << num << endl;
+	}
+	SimpleClass* GetThisPointer() {
+		return this;
+	}
+
+
+};
+
+int main() 
+{
+	SimpleClass s1(100);
+	SimpleClass* pt = s1.GetThisPointer(); //포인터는 자료형이 맞춰야한다
+	cout << pt << ", ";
+	(*pt).getNum(); //pt->getNum();
+
+	SimpleClass s2(200);
+	SimpleClass* pt2 = s2.GetThisPointer();
+	cout << pt2 << ", ";
+	(*pt2).getNum(); //pt2->getNum();
+
+
+	return 0;
+}

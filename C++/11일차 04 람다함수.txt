@@ -1,0 +1,87 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+ // [] () {}
+// [] : 캡쳐블록 : 람다함수에서 참조할 변수 목록, 비워놓을수 있음
+// () : 파라미터 : 람다 함수에서 사용할 인자 목록, 비워놓을수 있음
+// {} : 구성소스 : 일반 함수처럼 구현 할 수 있음
+
+auto func1 = []() {cout << "Lamda funtion\n"; };
+auto func2 = [](int x, int y)->bool {return x < y; };
+class Chulsoo
+{
+public:
+	int count;
+};
+
+int main()
+{
+
+	int number = 4;
+	vector<int> data{ 4,1,3,5,2,3,1,7 };
+	vector<int>::iterator result1 = find_if(data.begin(), data.end(),
+		[number](int i) {return i > number; });
+
+	cout << "4보다 큰 첫번째 정수 : " << *result1 << endl;
+
+	auto result2 = count_if(data.begin(), data.end(),
+		[number](int i) {return i > number; });
+
+	cout << "4보다 큰 첫번째 갯수 : " << result2 << endl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/*Chulsoo c;
+	c.count = 1;
+
+	for (int i = 0; i < 10; i++) {
+
+		[&c] {cout << c.count++ << "번째 스테이크를 먹는다" << endl; }();
+	}*/
+
+
+
+
+
+
+
+
+
+
+
+	//int x = 2;
+	//auto func3 = [=](int y) {  // '=' 은 모두 가져온다 '&' 넣어으면 래퍼런스 모두 가져온다
+	//	func1();
+	//	cout << "x < y = " << func2(x, y) << endl;
+
+	//};
+
+	//func3(4);
+
+	//auto func4 = [=](int y) {return x * x + y * y; };
+	//cout << "x*x + y*y = " << func4(5) << endl;
+
+
+
+
+
+
+
+
+
+	return 0;
+}

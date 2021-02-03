@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+class MenInfo {
+public:
+	//클래스 안에 구현
+	MenInfo();
+	MenInfo(std::string name);
+	void setName(std::string name);
+	std::string getname() const;
+
+private:
+
+	std::string user_name;
+
+};
+//클래스 밖에 구현
+MenInfo::MenInfo() {
+	user_name = "홍길동";
+}
+MenInfo::MenInfo(std::string name) {
+	user_name = name;
+}
+void MenInfo::setName(std::string name) {
+	user_name = name;
+}
+std::string MenInfo::getname() const {
+	return user_name;
+}
+
+int main()
+{
+	MenInfo human01;
+	//human01.setName("홍길동");
+	std::cout << human01.getname() << std::endl;
+	MenInfo human02("김태윤");
+	std::cout << human02.getname() << std::endl;
+	return 0;
+}

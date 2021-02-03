@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+template <class In, class Pred>
+In find_if(In begin, In end, Pred f) {
+	while (begin != end && !f(*begin))
+		begin++;
+	return begin;
+}
+
+bool IsOdd(int i) { return ((i % 2) == 1); }
+
+bool IsNegetive(int i) {
+	return i < 0;
+}
+
+void hello() {
+	cout << "Hello\n";
+}
+
+
+int next(int n) {
+	return n + 1;
+}
+
+int main()
+{
+	//int x = 5;
+
+	//int* p = &x;
+
+	//cout << "x = " << x << endl;
+
+	//*p = 6;
+
+	//cout << "x = " << x << endl;
+
+	//void (*fp)();
+	//fp = hello;
+	//fp(); //hello 함수를 호출
+
+	//int (*fp)(int);
+	//fp = next; //fp = &next;
+
+
+	//int i = 3;
+	//i = (*fp)(i);
+	//i = fp(i);
+
+
+	/*double analysis(const vector<Student_info>&)
+	typedef double (*analysis_fp)(const vector<Student_info>&)*/
+	std::vector<int> myvector;
+	myvector.push_back(10);
+	myvector.push_back(-5);
+	myvector.push_back(40);
+	myvector.push_back(55);
+	std::vector<int>::iterator it = ::find_if(myvector.begin(), myvector.end(), IsNegetive);
+	//std::cout << "첫 번째 홀수는 " << *it << '\n';
+	std::cout << "첫 번째 음수는 " << *it << '\n';
+
+
+	const char hello[] = { 'h','e','l','l','o','\0' };
+	
+	//std::string s(hello);
+	//std::string s("hello");
+	
+	std::string s(hello, hello + strlen(hello)); // p[n] == *(p+n)
+
+	std::cout << s << std::endl;
+	
+	return 0;
+}

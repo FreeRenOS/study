@@ -1,0 +1,60 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	cv::Mat img_src;
+
+	//절대경로
+	//string filename = "C:\\Users\\w\\source\\repos\\OpenCvtest\\OpenCvtest\\Images\\contour.png";
+	string filename = "images/test2.jpg";
+
+	img_src = imread(filename, IMREAD_COLOR);
+	if (img_src.empty())
+	{
+		cout << "이미지 파일을 읽을 수 없습니다." << endl;
+		return -1;
+	}
+
+
+
+	pyrDown(img_src, img_src);
+
+	int width = img_src.cols;
+	int height = img_src.rows;
+
+
+
+	Mat img_gray; // 이미지를 그레이로 변환
+	cvtColor(img_src, img_gray, COLOR_BGR2GRAY);
+
+	Mat img_binary; // 임계값적용 해서 이진화 이미지를 생성
+	threshold(img_gray, img_binary, 128, 255, THRESH_BINARY_INV);
+
+	Mat kernel = getStructuringElement(MORPH_RECT, Size(5, 5));
+	morphologyEx(img_binary, img_binary, MORPH_OPEN, kernel, Point(-1, -1),-1);
+
+
+
+	vector<vector<Point> > contours;
+	findContours(img_binary, contours, RETR_LIST, CHAIN_APPROX_SIMPLE);
+
+
+
+
+
+
+	namedWindow("Source");
+	imshow("Source", img_src);
+	imshow("Result", img_binary);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

@@ -1,0 +1,41 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+using namespace cv;
+using namespace std;
+
+
+int main()
+{
+	// 이미지판 만들기
+	int width = 640;
+	int height = 480;
+	Mat img(height, width, CV_8UC3,Scalar(0,0,0));  
+	// CV_8UC3 : 2에 8승 8비트= 255 , unc 정수, 3채널
+
+
+	////이미지 정보확인
+	//int img_h = img.rows;
+	//int img_w = img.cols;
+	//int img_bpp = img.channels();
+	//cout << img_h << " " << img_w << " " << img_bpp << endl;
+
+
+
+	//선그리기
+	//line(이미지,시작점,끝점,색깔,선두께);
+	line(img, Point(0, 0), Point(width - 1, height - 1), Scalar(0, 0, 255), 3);//끝에서 -1
+	line(img, Point(width - 1, 0), Point(0, height - 1), Scalar(0, 255, 0), 3);
+
+
+
+
+
+	imshow("result", img);
+
+
+	waitKey(0);
+	destroyAllWindows();
+
+	return 0;
+}

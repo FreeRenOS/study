@@ -1,0 +1,37 @@
+#include <iostream>
+
+using namespace std;
+class SelfRef {
+private:
+	int num;
+public:
+	SelfRef(int num) {
+		this->num = num;
+		cout << "객체 생성" << endl;
+	}
+	SelfRef& Adder(int num) {
+		this->num += num;
+		return *this; //*this는 this의 값이 아니고 this객체 전체를 가리킴
+	}
+	SelfRef& ShowNumber() {
+		cout << this->num << endl;
+		return *this;
+	}
+
+};
+
+int main()
+{
+	int num = 7;
+	int& r = num;
+	cout << &num << " " << &r <<endl;
+	cout << num << " " << r << endl;
+
+	SelfRef s(3);
+	SelfRef& ref = s.Adder(2);
+	s.ShowNumber();
+	ref.ShowNumber();
+	ref.Adder(1).ShowNumber().Adder(2).ShowNumber();
+
+	return 0;
+}

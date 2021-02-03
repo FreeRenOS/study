@@ -1,0 +1,72 @@
+// grade.cpp
+#include "grade.h"
+
+double grade(double midterm, double finalterm, double homework) {
+	return 0.2 * midterm + 0.4 * finalterm + 0.4 * homework;
+}
+
+double grade(double midterm, double finalterm, const vector<double>& hw) {
+	if (hw.size() == 0)
+		throw domain_error("과제 데이터가 없습니다. grade 함수");
+
+	return grade(midterm, finalterm, median(hw));
+}
+
+double grade(const student_info& s) {
+	return grade(s.midterm, s.finalterm, s.homework);
+}
+
+
+
+
+
+//median.cpp
+#include "median.h"
+
+
+double median(vector<double>vec) {
+	//1. 점수의 존재 유무 확인
+	typedef vector<double>::size_type vec_sz;
+	vec_sz size = vec.size();
+
+	if (size == 0) {
+		throw domain_error("벡터가 비었습니다. median 함수");
+		//cout << endl << "입력한 과제 점수가 없습니다. 종료합니다.!" << endl;
+		//return 1; //메인에서는 이렇게쓰면되는데 함수에서는 예외처리해야됨
+	}
+
+	//2.정렬 sort <algorithm>
+	sort(vec.begin(), vec.end());
+
+	//과제점수의 가운데값 median 구함
+	vec_sz min = size / 2;
+	double median;
+	median = size % 2 == 0 ? (vec[min] + vec[min - 1]) / 2 : vec[min];
+	return median;
+}
+
+//median.cpp
+#include "median.h"
+
+
+double median(vector<double>vec) {
+	//1. 점수의 존재 유무 확인
+	typedef vector<double>::size_type vec_sz;
+	vec_sz size = vec.size();
+
+	if (size == 0) {
+		throw domain_error("벡터가 비었습니다. median 함수");
+		//cout << endl << "입력한 과제 점수가 없습니다. 종료합니다.!" << endl;
+		//return 1; //메인에서는 이렇게쓰면되는데 함수에서는 예외처리해야됨
+	}
+
+	//2.정렬 sort <algorithm>
+	sort(vec.begin(), vec.end());
+
+	//과제점수의 가운데값 median 구함
+	vec_sz min = size / 2;
+	double median;
+	median = size % 2 == 0 ? (vec[min] + vec[min - 1]) / 2 : vec[min];
+	return median;
+}
+
