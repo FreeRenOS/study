@@ -1,0 +1,13 @@
+; for 16-bit app support
+[386enh]
+woafont=dosapp.fon
+ega80woa.fon=ega80woa.fon
+ega40woa.fon=ega40woa.fon
+cga80woa.fon=cga80woa.fon
+cga40woa.fon=cga40woa.fon
+
+[drivers]
+wave=mmdrv.dll
+timer=timer.drv
+
+[mci]

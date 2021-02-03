@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_308adff400d44861b8efdec2b6dfd800 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_308adff400d44861b8efdec2b6dfd800" ></div>
+        
+</body>
+<script>    
+    
+            var map_308adff400d44861b8efdec2b6dfd800 = L.map(
+                "map_308adff400d44861b8efdec2b6dfd800",
+                {
+                    center: [35.84616860699997, 128.55895958766888],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_d669d108f94a4ff78b497bc32b2e5949 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            var circle_marker_301e4c3a791444ba85a4085f7c8ce92e = L.circleMarker(
+                [35.8874864191681, 128.591953455867],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_301e4c3a791444ba85a4085f7c8ce92e.bindTooltip(
+                `<div>
+                     스타벅스 - 대구광역시 북구 침산동 245-1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_9d2fa79b821c45e09f2db4851d319b6a = L.circleMarker(
+                [35.8878014873204, 128.592033333502],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_9d2fa79b821c45e09f2db4851d319b6a.bindTooltip(
+                `<div>
+                     이디야커피 - 대구광역시 북구 침산동 265-28
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_77c109e009f0478ca813c24a7fa5c0f4 = L.circleMarker(
+                [35.8558517742415, 128.49381114830098],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_77c109e009f0478ca813c24a7fa5c0f4.bindTooltip(
+                `<div>
+                     스타벅스 - 대구광역시 달서구 신당동 1721-12
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_16440b58e8d64bf99c7f4262f49b7166 = L.circleMarker(
+                [35.8558274631559, 128.493146693962],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_16440b58e8d64bf99c7f4262f49b7166.bindTooltip(
+                `<div>
+                     이디야커피 - 대구광역시 달서구 신당동 1721-16
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_044e4fa7f92046059e43a4f593250441 = L.circleMarker(
+                [35.866341927814204, 128.591851543249],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_044e4fa7f92046059e43a4f593250441.bindTooltip(
+                `<div>
+                     스타벅스대구반월당점 - 대구광역시 중구 덕산동 53-3
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a476e5dcd69344ce9631d989338f66fb = L.circleMarker(
+                [35.8673956728951, 128.59201440401898],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_a476e5dcd69344ce9631d989338f66fb.bindTooltip(
+                `<div>
+                     이디아까페 - 대구광역시 중구 남성로 92
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_f9e676f0b0ab4683842f6040f119db02 = L.circleMarker(
+                [35.867298879815394, 128.593364622387],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_f9e676f0b0ab4683842f6040f119db02.bindTooltip(
+                `<div>
+                     스타벅스대구중앙로점 - 대구광역시 중구 동성로3가 35-13
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e87c871357b544419b14684ce35eb8ab = L.circleMarker(
+                [35.8673956728951, 128.59201440401898],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_e87c871357b544419b14684ce35eb8ab.bindTooltip(
+                `<div>
+                     이디아까페 - 대구광역시 중구 남성로 92
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_570d15f8bbdd442c8c2790f64240dafb = L.circleMarker(
+                [35.82279130566079, 128.533791042123],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_570d15f8bbdd442c8c2790f64240dafb.bindTooltip(
+                `<div>
+                     스타벅스 - 대구광역시 달서구 상인동 54-3
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4bf871f014844efdbadb02909f9855e9 = L.circleMarker(
+                [35.822743362299796, 128.532407332608],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_4bf871f014844efdbadb02909f9855e9.bindTooltip(
+                `<div>
+                     이디야커피 - 대구광역시 달서구 상인동 1595-7
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8f1ea21630a747028374ef851e1453eb = L.circleMarker(
+                [35.877950161861, 128.629248658652],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_8f1ea21630a747028374ef851e1453eb.bindTooltip(
+                `<div>
+                     스타벅스신세계백화점대구점 - 대구광역시 동구 신천동 1506
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_094b5189a3d44b0b9a694fb42eb002af = L.circleMarker(
+                [35.8790975727776, 128.628726138595],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_094b5189a3d44b0b9a694fb42eb002af.bindTooltip(
+                `<div>
+                     이디야커피 - 대구광역시 동구 신암동 294
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1c2117e7a1eb4f00bfd904bbdb69e64b = L.circleMarker(
+                [35.8674679365005, 128.593808814093],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_1c2117e7a1eb4f00bfd904bbdb69e64b.bindTooltip(
+                `<div>
+                     스타벅스 - 대구광역시 중구 동성로3가 32-1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_5bf4334796bf4bb188f7b853c59df364 = L.circleMarker(
+                [35.8673956728951, 128.59201440401898],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_5bf4334796bf4bb188f7b853c59df364.bindTooltip(
+                `<div>
+                     이디아까페 - 대구광역시 중구 남성로 92
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_ff6e478f144f40a99a2dd9f3ae38fb0c = L.circleMarker(
+                [35.6931712047899, 128.45901792978],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_ff6e478f144f40a99a2dd9f3ae38fb0c.bindTooltip(
+                `<div>
+                     스타벅스대구테크노폴리스점 - 대구광역시 달성군 유가면 봉리 607-1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a2f050b130134cf4899fdfc90099df4b = L.circleMarker(
+                [35.6932531886948, 128.461150900828],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_a2f050b130134cf4899fdfc90099df4b.bindTooltip(
+                `<div>
+                     이디야커피 - 대구광역시 달성군 유가면 봉리 615
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d46249bedc6041eba0b0e67769fb44b9 = L.circleMarker(
+                [35.867294885000604, 128.594172940819],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_d46249bedc6041eba0b0e67769fb44b9.bindTooltip(
+                `<div>
+                     스타벅스 - 대구광역시 중구 동성로3가 91-16
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_037396d2dec94f6e8d939731d2a99239 = L.circleMarker(
+                [35.8673956728951, 128.59201440401898],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_037396d2dec94f6e8d939731d2a99239.bindTooltip(
+                `<div>
+                     이디아까페 - 대구광역시 중구 남성로 92
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c99c92b3aa5141a5a028b3423b719eb3 = L.circleMarker(
+                [35.8550707246958, 128.51032515716003],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_c99c92b3aa5141a5a028b3423b719eb3.bindTooltip(
+                `<div>
+                     스타벅스 - 대구광역시 달서구 이곡동 1248-1
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d116d4d4f4d448f38f8b80b4d4ebe56b = L.circleMarker(
+                [35.8543411546225, 128.512324425376],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 3}
+            ).addTo(map_308adff400d44861b8efdec2b6dfd800);
+        
+    
+            circle_marker_d116d4d4f4d448f38f8b80b4d4ebe56b.bindTooltip(
+                `<div>
+                     이디야커피 - 대구광역시 달서구 이곡동 1250-14
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
