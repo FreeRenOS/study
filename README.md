@@ -2,8 +2,8 @@
 
 - C++ :
     + 기간: 2020년 8월
-    + 교재: Accelerated C++  
-    
+    + 교재: Accelerated C++
+      
     
 - Python : 2020년 9월
     + 기간: 
