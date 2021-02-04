@@ -37,7 +37,7 @@
     + 교재: 맛있는 MongoDB
     
 - 라즈베리파이 모형차 드라이버
-    + https://github.com/moana46/loginPengsoo
+    + https://github.com/hyunglory/DriverPengsoo.git
 
 - 모형차 컨트롤 안드로이드
     + https://github.com/moana46/loginPengsoo
