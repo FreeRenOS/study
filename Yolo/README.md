@@ -1,5 +1,5 @@
 ## contents
 
 - Yolo:
-    + https://github.com/tzutalin/labelImg
+    + 라벨링: https://github.com/tzutalin/labelImg
     +
