@@ -27,6 +27,8 @@
 - OpenCV
     + 기간: 2020년 12월
     + 교재: X
+- Yolo
+    + 라벨링: https://github.com/tzutalin/labelImg
 
 - 비지니스 모델
     + 기간: 2020년 1월
