@@ -1,0 +1,46 @@
+mongodb 원격 접속 방법
+1. mongod.cfg 수정 - cmd 관리자 권한 실행
+cd C:\Program Files\MongoDB\Server\4.4\bin
+notepad mongod.cfg 실행
+수정
+net:
+  port: 27017
+  bindIp: 127.0.0.1, 0.0.0.0
+  #bindIp: 127.0.0.1
+
+security:
+  authorization: enabled
+
+2. 인증 정보 생성
+studio 3t 실행
+admin 유저 만들기(권한 설정해야됨)
+oss 유저 만들기(권한 설정해야됨)
+
+3. mongodb 서비스 재기동
+서비스 MongoDB 다시시작
+
+4. 포트 번호 방화벽 열어야 함
+고급 보안이 포함된 방화벽
+
+5. mongo client 에서 원격 접속
+mongo --host 221.164.153.167 -u admin -p
+
+
+
+
+몽고DB CSV파일 import 방법
+1. Studio 3T에서 import collection
+2. (MongoDB Tools 설치되어있어야됨 mongoimport 명령어 사용) cmd 
+cd 파일위치
+mongoimport -u admin -p password --db "pharm2019_1" --collection "pharm2019_1" --drop --type csv --headerline --host "localhost"  --file "pharm_2019.csv" --authenticationDatabase admin
+
+3. pyathon 으로 파일 오픈해서 json 형식으로 변경
+
+
+getJson : 동기
+ajax : 비동기
+
+async 약국명 주소 위도 경도
+
+
+document.getElementById()
