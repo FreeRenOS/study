@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .circle {
+            display: inline-block;
+            border: 2px solid red;
+
+            background-color: aqua;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            text-align:center;
+            line-height: 80px;
+        }
+    </style>
+</head>
+<body>
+        <input type="text" name="mylotto1" readonly value="{{ my_lotto[0] }}">
+        <input type="text" name="mylotto2" value="{{ my_lotto[1] }}">
+        <input type="text" name="mylotto3" value="{{ my_lotto[2] }}">
+        <input type="text" name="mylotto4" value="{{ my_lotto[3] }}">
+        <input type="text" name="mylotto5" value="{{ my_lotto[4] }}">
+        <input type="text" name="mylotto6" value="{{ my_lotto[5] }}">
+        <ul>
+            {% for lotto in lotto_list %}
+                <li class="circle">
+                    {{ lotto }}
+                </li>
+            {%  endfor %}
+        </ul>
+</body>
+</html>

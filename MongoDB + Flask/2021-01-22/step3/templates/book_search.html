@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form action="/book_search_process" method="post">
+
+    검색할 항목 선택:
+    <select name="item_to_search" id="item_to_search">
+
+        <option value="id">id</option>
+        <option value="title">서적 제목</option>
+        <option value="author">저자 명</option>
+        <option value="published_date">출간일자</option>
+        <option value="isbn">ISBN</option>
+        <option value="created_date">등록일자</option>
+    </select>
+
+    <input type="text" name="data_to_search">
+    <input type="submit" value="검 색">
+
+</form>
+{% endblock %}

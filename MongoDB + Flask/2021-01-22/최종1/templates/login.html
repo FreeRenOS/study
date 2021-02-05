@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form action="/login" method="post">
+    <div class="mb-3">
+      <label for="username" class="form-label">유저이름</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="유저이름 입력">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">비밀번호</label>
+      <input type="text" class="form-control" id="password" name="password" placeholder="비밀번호 입력">
+    </div>
+      <button type="submit">로그인</button>
+</form>
+{% endblock %}

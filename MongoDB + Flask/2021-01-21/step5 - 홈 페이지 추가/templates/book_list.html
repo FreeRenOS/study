@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h3>서적 목록</h3>
+    <div style="width: 800px">
+        <div style="width: 800px; text-align: right">
+        {{ total_count }}건 검색됨
+        </div>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>_id</td>
+                <td>제목</td>
+{#                <td>표지</td>#}
+                <td>저자</td>
+                <td>가격</td>
+                <td>ISBN</td>
+                <td>등록일자</td>
+
+                <td>
+                </td>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book._id }}</td>
+                <td><a href="/book_details/{{ book._id }}">{{ book.title }}</a></td>
+{#                {% if book.encoded_data != None %}#}
+{#                    <td><a href="/book_details/{{ book._id }}"><img width="60px" src="data:image/png;base64,{{ book.encoded_data.decode('utf-8') }}"></a></td>#}
+{#                {% else %}#}
+{#                    <td></td>#}
+{#                {% endif %}#}
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a href="/book_edit/{{ book._id }}"><input type="button" value="수정" class="btn btn-outline-secondary"></a>
+                    <input type="button" value="삭제">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
