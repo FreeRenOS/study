@@ -1,7 +1,7 @@
 # 밑바닥부터 시작하는 딥러닝3
-	## 2021-03-04
-		- colab에서 MNIST train-images-idx3-ubyte.gz 다운로드시 HTTP 403 error 발행
-		- dezero/datasets.py 파일 github에서 다운로드 할 수 있게 변경
+## 2021-03-04
+- colab에서 MNIST train-images-idx3-ubyte.gz 다운로드시 HTTP 403 error 발행
+- dezero/datasets.py 파일 github에서 다운로드 할 수 있게 변경
 		
 		 def prepare(self):
         url = 'http://yann.lecun.com/exdb/mnist/'
