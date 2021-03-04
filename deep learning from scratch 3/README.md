@@ -11,7 +11,7 @@
 				      'label': 't10k-labels-idx1-ubyte.gz'}
 		
 		def prepare(self):
-			## 수정
+			## 수정 ##
 			url = 'https://github.com/FreeRenOS/study/blob/main/deep%20learning%20from%20scratch%203/'
 			# url = 'http://yann.lecun.com/exdb/mnist/'
 			train_files = {'target': 'train-images-idx3-ubyte.gz?raw=true',
